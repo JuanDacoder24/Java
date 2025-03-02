@@ -1,43 +1,18 @@
 import java.time.LocalDate;
+import java.util.LinkedList;
 
-public class Cliente {
-private String dni;
-    private String nombre;
-    private String numSocio;
-    private String direccion;
-    private LocalDate fechaNacimiento;
-    private LocalDate fechaBaja;
-    private Pelicula [] PeliculasAlquiladas;
-    private String validDni;
+public class Cliente extends Persona{ 
+    
+    protected String numSocio;
+    protected LocalDate fechaBaja;
+    LinkedList<Articulo> articulosAlquilados = new LinkedList<Articulo>();
 
-    public Cliente(String dni, String nombre, String numSocio, String direccion, LocalDate fechaNacimiento,
-        LocalDate fechaBaja) {
-        this.dni = dni;
-        this.nombre = nombre;
+    public Cliente(String dni, String nombre, String direccion, LocalDate fechaNacimiento, String numSocio,
+            LocalDate fechaBaja, LinkedList<Articulo> articulosAlquilados) {
+        super(dni, nombre, direccion, fechaNacimiento);
         this.numSocio = numSocio;
-        this.direccion = direccion;
-        this.fechaNacimiento = fechaNacimiento;
-        this.PeliculasAlquiladas = new Pelicula[100];
-    }
-
-    public Cliente(Pelicula[] PeliculasAlquiladas) {
-        this.PeliculasAlquiladas = PeliculasAlquiladas;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.fechaBaja = fechaBaja;
+        this.articulosAlquilados = articulosAlquilados;
     }
 
     public String getNumSocio() {
@@ -48,22 +23,6 @@ private String dni;
         this.numSocio = numSocio;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-}
-
     public LocalDate getFechaBaja() {
         return fechaBaja;
     }
@@ -72,13 +31,19 @@ private String dni;
         this.fechaBaja = fechaBaja;
     }
 
-    public String mostrarInfoCliente(){
-        String infoCliente = String.format("Informacion del cliente - Nombre: %s, DNI: %s", 
-        this.nombre, this.dni);
-        return infoCliente;
+    public LinkedList<Articulo> getArticulosAlquilados() {
+        return articulosAlquilados;
     }
 
-    public String mostrarPeliculasAlquiladas(){
-        return mostrarPeliculasAlquiladas();
+    public void setArticulosAlquilados(LinkedList<Articulo> articulosAlquilados) {
+        this.articulosAlquilados = articulosAlquilados;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente [dni=" + dni + ", nombre=" + nombre + ", numSocio=" + numSocio + ", fechaBaja=" + fechaBaja
+                + ", articulosAlquilados=" + articulosAlquilados + "]";
+    }
+
+    
 }

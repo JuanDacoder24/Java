@@ -1,8 +1,8 @@
 public class VideoDaw {
+
     private String cif;
     private String direccion;
     private String fechaAlta;
-
     private Pelicula [] peliculasRegistradas;
     private Cliente [] clientesRegistrados;
     private int PeRegistradas;
@@ -44,7 +44,7 @@ public class VideoDaw {
     public String mostrarClientesRegistrados(){
         if(clientesRegistrados != null){
             for (int i = 0; i < ClRegistrados; i++) {
-                System.out.println(i + "." + clientesRegistrados[i].mostrarInfoCliente());
+                System.out.println(i + "." + clientesRegistrados[i].toString());
             }
         }
         return mostrarClientesRegistrados();

@@ -1,13 +1,13 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Pelicula extends Articulo{
+public class VideoJuego extends Articulo {
 
     protected Generos genero;
     protected LocalDateTime fechaAlquiler;
     protected boolean isAlquilada;
 
-    public Pelicula(LocalDateTime fechaAlquiler, Generos genero, boolean isAlquilada, String codigo, String titulo, LocalDate fechaRegistro, LocalDate fechaBaja) {
+    public VideoJuego(LocalDateTime fechaAlquiler, Generos genero, boolean isAlquilada, String codigo, String titulo, LocalDate fechaRegistro, LocalDate fechaBaja) {
         super(codigo, titulo, fechaRegistro, fechaBaja);
         this.fechaAlquiler = fechaAlquiler;
         this.genero = genero;
@@ -44,5 +44,4 @@ public class Pelicula extends Articulo{
                 + FechaRegistro + ", fechaAlquiler=" + fechaAlquiler + ", FechaBaja=" + FechaBaja + ", isAlquilada="
                 + isAlquilada + "]";
     }
-
 }
