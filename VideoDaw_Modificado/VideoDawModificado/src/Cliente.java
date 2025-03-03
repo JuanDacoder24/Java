@@ -5,7 +5,7 @@ public class Cliente extends Persona{
     
     protected String numSocio;
     protected LocalDate fechaBaja;
-    LinkedList<Articulo> articulosAlquilados = new LinkedList<Articulo>();
+    LinkedList<Articulo> articulosAlquilados = new LinkedList<>();
 
     public Cliente(String dni, String nombre, String direccion, LocalDate fechaNacimiento, String numSocio,
             LocalDate fechaBaja, LinkedList<Articulo> articulosAlquilados) {

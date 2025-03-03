@@ -44,12 +44,10 @@ public class GestionVideoDaw {
                     break;
 
                 case "2":
-                teclado = new Scanner (System.in);
                 System.out.println("Registrar Pelicula");
-                String titulo = MyUtils.leerTextoPantalla("Introduce el titulo de la pelicula");
-                Generos genero = MyUtils.listaPeliculas();
-                Pelicula p = new Pelicula(titulo, genero);
-                System.out.println(p.mostrarInfoPelicula());
+                String peliculas;
+                teclado = new Scanner (System.in);
+                peliculas = teclado.nextLine();
                     break;
 
                 case "3":
