@@ -54,9 +54,13 @@ public class VideoDaw {
         return alquilarPelicula(p, c);
     }
 
-    public String devolverPelicula(Pelicula p, Cliente c){
-        
-        return devolverPelicula(p, c);
+    public boolean devolverPelicula(Pelicula p, Cliente c) {
+        if (peliculasRegistradas.contains(p) && clientesRegistrados.contains(c)) {
+            System.out.println("Pelicula devuelta: " + p.getTitulo() + " por " + c.getNombre());
+            return true;
+        }
+        System.out.println("No se pudo devolver la película.");
+        return false;
     }
 
     public boolean darBajaCliente(Cliente c){
@@ -68,6 +72,11 @@ public class VideoDaw {
         }
         return false;
     }
+
+    public boolean eliminarPelicula(Pelicula p) {
+        return peliculasRegistradas.remove(p);
+    }
+    
     
     public boolean registrarCliente(Cliente c){
         for (Cliente cliente : clientesRegistrados) {
@@ -97,14 +106,11 @@ public class VideoDaw {
         return true;
     }
 
-    public String mostrarPeliculasNoAlquiladas(VideoDaw v1){
-        
-        return peliculasNoAlquiladas;
-    }
-
-    public boolean darBajaPelicula(Pelicula pelicula, int p){
-        
-        return quitarPelicula;
+    public boolean mostrarClientesRegistrados(Cliente c){
+        for (Cliente cliente : clientesRegistrados) {
+            System.out.println(cliente);
+        }
+        return true;
     }
 
     @Override
