@@ -8,11 +8,11 @@ public class Articulo {
     protected LocalDate FechaRegistro;
     protected LocalDate FechaBaja;
 
-    public Articulo(String codigo, String titulo, LocalDate fechaRegistro, LocalDate fechaBaja) {
+    public Articulo(String codigo, String titulo) {
         this.codigo = codigo;
         this.titulo = titulo;
-        FechaRegistro = fechaRegistro;
-        FechaBaja = fechaBaja;
+        this.FechaRegistro = LocalDate.now();
+        this.FechaBaja = null;
     }
     
     public String getCodigo() {

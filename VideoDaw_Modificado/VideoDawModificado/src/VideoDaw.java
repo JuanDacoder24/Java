@@ -31,18 +31,28 @@ public class VideoDaw {
         return fechaAlta;
     }
 
-    public String mostrarPeliculasRegistradas(){
-        for (Pelicula p : peliculasRegistradas) {
-            System.out.println(p);
+    public String mostrarPeliculasRegistradas() {
+        StringBuilder sb = new StringBuilder();
+        if (peliculasRegistradas.isEmpty()) {
+            sb.append("No hay películas registradas.\n");
+        } else {
+            for (Pelicula p : peliculasRegistradas) {
+                sb.append(p.toString()).append("\n");
+            }
         }
-        return mostrarPeliculasRegistradas();
+        return sb.toString();
     }
 
-    public String mostrarClientesRegistrados(){
-        for (Cliente c : clientesRegistrados) {
-            System.out.println(c);
+    public String mostrarClientesRegistrados() {
+        StringBuilder sb = new StringBuilder();
+        if (clientesRegistrados.isEmpty()) {
+            sb.append("No hay clientes registrados.\n");
+        } else {
+            for (Cliente c : clientesRegistrados) {
+                sb.append(c.toString()).append("\n");
+            }
         }
-        return mostrarClientesRegistrados();
+        return sb.toString();
     }
 
     public String alquilarPelicula(Pelicula p, Cliente c){
@@ -77,7 +87,6 @@ public class VideoDaw {
         return peliculasRegistradas.remove(p);
     }
     
-    
     public boolean registrarCliente(Cliente c){
         for (Cliente cliente : clientesRegistrados) {
             if(cliente.getNombre().equalsIgnoreCase(ClRegistrados)){
@@ -85,7 +94,7 @@ public class VideoDaw {
                 return false;  
             }
         }
-        Cliente nuevoCliente = new Cliente(PeRegistradas, ClRegistrados, direccion, null, cif, null, null);
+        Cliente nuevoCliente = new Cliente(PeRegistradas, ClRegistrados, direccion, null, cif, null);
         clientesRegistrados.add(nuevoCliente);
         System.out.println("Nuevo cliente registrado: " + nuevoCliente);
         contador++;
@@ -99,7 +108,7 @@ public class VideoDaw {
                 return false;
             }
         }
-        Pelicula nuevaPelicula = new Pelicula(null, null, false, PeRegistradas, ClRegistrados, null, null);
+        Pelicula nuevaPelicula = new Pelicula(null, PeRegistradas, ClRegistrados);
         peliculasRegistradas.add(nuevaPelicula);
         System.out.println("Pelicula registrada con exito: " + nuevaPelicula);
         contador++;
@@ -112,7 +121,7 @@ public class VideoDaw {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
         return "VideoDaw [cif=" + cif + ", direccion=" + direccion + "]";

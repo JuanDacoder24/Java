@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Pelicula extends Articulo{
@@ -7,11 +6,11 @@ public class Pelicula extends Articulo{
     protected LocalDateTime fechaAlquiler;
     protected boolean isAlquilada;
 
-    public Pelicula(LocalDateTime fechaAlquiler, Generos genero, boolean isAlquilada, String codigo, String titulo, LocalDate fechaRegistro, LocalDate fechaBaja) {
-        super(codigo, titulo, fechaRegistro, fechaBaja);
-        this.fechaAlquiler = fechaAlquiler;
+    public Pelicula(Generos genero, String codigo, String titulo) {
+        super(codigo, titulo);
+        this.fechaAlquiler = LocalDateTime.now();
         this.genero = genero;
-        this.isAlquilada = isAlquilada;
+        this.isAlquilada = false;
     }
 
     public Generos getGenero() {
@@ -40,9 +39,8 @@ public class Pelicula extends Articulo{
 
     @Override
     public String toString() {
-        return "Pelicula [codigo=" + codigo + ", titulo=" + titulo + ", genero=" + genero + ", FechaRegistro="
-                + FechaRegistro + ", fechaAlquiler=" + fechaAlquiler + ", FechaBaja=" + FechaBaja + ", isAlquilada="
-                + isAlquilada + "]";
+        return "Pelicula [genero=" + genero + ", titulo=" + titulo + ", FechaRegistro=" + FechaRegistro + "]";
     }
 
+    
 }

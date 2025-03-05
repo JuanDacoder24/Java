@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,34 +41,31 @@ public class GestionVideoDaw {
                     } while (!setValidCif(cif));
 
                     System.out.print("Introduzca la dirección del local: ");
-                    String direccion = teclado.nextLine();
+                    String direccionLocal = teclado.nextLine();
                     System.out.print("Introduzca la fecha de alta (DD/MM/AAAA): ");
                     String fechaAlta = teclado.nextLine();
-
-                    videoD = new VideoDaw(cif, direccion, fechaAlta);
+                    videoD = new VideoDaw(cif, direccionLocal, fechaAlta);
                     System.out.println("Videoclub registrado con éxito.");
-                    break;
+                break;
 
-                    case "2":
-                    if (videoD == null) {
-                        System.out.println("Debe registrar primero el videoclub antes de añadir películas.");
-                        break;
-                    }
-                    System.out.print("Introduzca el título de la película: ");
-                    String tituloPelicula = teclado.nextLine();
-                    Pelicula nuevaPelicula = new Pelicula(null, null, false, tituloPelicula, null, null, null);
+                case "2":
+                    
+                    System.out.println("Introduce el genero");
+                    String genero = teclado.nextLine();
+                    
+                    System.out.print("Introduzca el codigo de la pelicula: ");
+                    String codigo = teclado.nextLine();
+                    System.out.println("Introduce el titulo de la pelicula");
+                    String titulo = teclado.nextLine();
+                    Pelicula nuevaPelicula = new Pelicula(null, codigo, titulo);
                     if (videoD.registrarPelicula(nuevaPelicula)) {
                         System.out.println("Película registrada correctamente.");
                     } else {
                         System.out.println("Error: La película ya está registrada.");
                     }
-                    break;
+                break;
                 
                 case "3":
-                    if (videoD == null) {
-                        System.out.println("Debe registrar primero el videoclub antes de añadir clientes.");
-                        break;
-                    }
                     String dni;
                     do {
                         System.out.print("Introduzca el DNI del cliente: ");
@@ -77,23 +77,31 @@ public class GestionVideoDaw {
                         }
                     } while (!setValidDni(dni));
                 
-                    System.out.print("Introduzca el nombre del cliente: ");
+                    System.out.print("Introduzca el nombre del cliente ");
                     String nombreCliente = teclado.nextLine();
-                
-                    Cliente nuevoCliente = new Cliente(dni, nombreCliente, null, null, null, null, null);
+                    System.out.print("Introduzca la direccion del cliente ");
+                    String direccion = teclado.nextLine();
+                    System.out.println("Introduca la fecha de nacimiento");
+                    String fechaNacimiento = teclado.nextLine();
+                    System.out.println("Escriba el numero de socio");
+                    String numSocio = teclado.nextLine();
+                    try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        LocalDate fecha = LocalDate.parse(fechaNacimiento, formatter);
+                        System.out.println("Tu fecha de nacimiento es: " + fecha);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("La fecha ingresada no es válida. Por favor, usa el formato dd/mm/yyyy.");
+                    }
+                    Cliente nuevoCliente = new Cliente(dni, nombreCliente, direccion, null, numSocio, null);
                     
                     if (videoD.registrarCliente(nuevoCliente)) {
                         System.out.println("Cliente registrado correctamente.");
                     } else {
                         System.out.println("Error: El cliente ya está registrado.");
                     }
-                    break;
+                break;
                 
                 case "4":
-                    if (videoD == null) {
-                        System.out.println("Debe registrar primero el videoclub antes de alquilar películas.");
-                        break;
-                    }
                     System.out.println("Clientes disponibles:");
                     videoD.mostrarClientesRegistrados();
                     System.out.print("Ingrese el nombre del cliente que alquilará: ");
@@ -113,13 +121,9 @@ public class GestionVideoDaw {
                     } else {
                         System.out.println("Cliente o película no encontrados.");
                     }
-                    break;
+                break;
                 
                 case "5":
-                    if (videoD == null) {
-                        System.out.println("Debe registrar primero el videoclub antes de devolver películas.");
-                        break;
-                    }
                     System.out.print("Ingrese el nombre del cliente que devuelve la película: ");
                     String clienteDevuelve = teclado.nextLine();
                     System.out.print("Ingrese el título de la película a devolver: ");
@@ -134,13 +138,10 @@ public class GestionVideoDaw {
                     } else {
                         System.out.println("Cliente o película no encontrados.");
                     }
-                    break;
+                break;
                 
                 case "6":
-                    if (videoD == null) {
-                        System.out.println("Debe registrar primero el videoclub antes de eliminar clientes.");
-                        break;
-                    }
+                    
                     System.out.print("Ingrese el nombre del cliente a dar de baja: ");
                     String clienteBaja = teclado.nextLine();
                 
@@ -151,7 +152,7 @@ public class GestionVideoDaw {
                     } else {
                         System.out.println("No se encontró al cliente.");
                     }
-                    break;
+                break;
                 
                 case "7":
                 try {
@@ -196,7 +197,7 @@ public class GestionVideoDaw {
     }
 
     public static boolean setValidCif(String cif) {
-        Pattern pat = Pattern.compile("[A-Z]{1}[0-9]{7}[A-Z]{1}");
+        Pattern pat = Pattern.compile("[A-Z]{1}[0-9]{8}");
         Matcher mat = pat.matcher(cif);
         return mat.matches();
     }

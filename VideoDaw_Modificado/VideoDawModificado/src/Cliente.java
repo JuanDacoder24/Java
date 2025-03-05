@@ -8,11 +8,10 @@ public class Cliente extends Persona{
     LinkedList<Articulo> articulosAlquilados = new LinkedList<>();
 
     public Cliente(String dni, String nombre, String direccion, LocalDate fechaNacimiento, String numSocio,
-            LocalDate fechaBaja, LinkedList<Articulo> articulosAlquilados) {
+            LocalDate fechaBaja) {
         super(dni, nombre, direccion, fechaNacimiento);
         this.numSocio = numSocio;
         this.fechaBaja = fechaBaja;
-        this.articulosAlquilados = articulosAlquilados;
     }
 
     public String getNumSocio() {
@@ -41,9 +40,11 @@ public class Cliente extends Persona{
 
     @Override
     public String toString() {
-        return "Cliente [dni=" + dni + ", nombre=" + nombre + ", numSocio=" + numSocio + ", fechaBaja=" + fechaBaja
-                + ", articulosAlquilados=" + articulosAlquilados + "]";
+        return "Cliente [dni=" + dni + ", numSocio=" + numSocio + ", fechaNacimiento="
+                + fechaNacimiento + "]";
     }
+
+    
 
     
 }
