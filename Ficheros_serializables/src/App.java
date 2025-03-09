@@ -21,7 +21,7 @@ public class App {
 
         LinkedList<Libro> libros = new LinkedList<>();
 
-        try (FileOutputStream file = new FileOutputStream("src\\Resources\\Libros.dat", false); ObjectOutputStream buffer = new ObjectOutputStream(file)){
+        try (FileOutputStream file = new FileOutputStream("./Resources/Libros.dat", false); ObjectOutputStream buffer = new ObjectOutputStream(file)){ 
             
         } catch (IOException e) {
             System.out.println("Se ha producido un error: "+e.getMessage());
@@ -49,9 +49,14 @@ public class App {
                 autor = teclado.nextLine();
                 System.out.println("Ingresa la fecha de publicacion");
                 fechaPublicacion = teclado.nextLine();
+                libro = new Libro(isbn, titulo, autor, fechaPublicacion);
                     break;
 
                 case "2":
+                System.out.println("Estos son los libros existentes");
+                    for (Libro linea : libros) {
+                        System.out.println(linea);
+                    }
                     break;
 
                 case "3":
@@ -61,7 +66,12 @@ public class App {
                     break;
 
                 case "4":
-                
+                try (ObjectOutputStream buffer = new ObjectOutputStream(new FileOutputStream("Libros.dat"))) {
+                    buffer.writeObject(libros);
+                    System.out.println("Libros guardados correctamente.");
+                } catch (IOException e) {
+                    System.out.println("Error al guardar: " + e.getMessage());
+                }
                     break;
 
                 case "5":
@@ -82,8 +92,8 @@ public class App {
         return true;
     }
 
-    public static boolean libroEliminado(LinkedList<Libro> productos, String isbn) {
-        Iterator<Libro> iterator = productos.iterator();
+    public static boolean libroEliminado(LinkedList<Libro> libros, String isbn) {
+        Iterator<Libro> iterator = libros.iterator();
         while (iterator.hasNext()) {
             Libro Libro = iterator.next();
             if (Libro.getIsbn().equals(isbn)) {
@@ -95,4 +105,6 @@ public class App {
         System.out.println("Producto no encontrado.");
         return false;
     }
+
+    
 }
