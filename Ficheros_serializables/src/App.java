@@ -21,10 +21,12 @@ public class App {
 
         LinkedList<Libro> libros = new LinkedList<>();
 
-        try (FileOutputStream file = new FileOutputStream("./Resources/Libros.dat", false); ObjectOutputStream buffer = new ObjectOutputStream(file)){ 
-            
+        try (FileOutputStream fileOut = new FileOutputStream("./Resources/Libros.dat");
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(libros);
+
         } catch (IOException e) {
-            System.out.println("Se ha producido un error: "+e.getMessage());
+            e.printStackTrace();
         }
 
         do {
@@ -50,6 +52,7 @@ public class App {
                 System.out.println("Ingresa la fecha de publicacion");
                 fechaPublicacion = teclado.nextLine();
                 libro = new Libro(isbn, titulo, autor, fechaPublicacion);
+                libros.add(libro);
                     break;
 
                 case "2":
@@ -66,7 +69,7 @@ public class App {
                     break;
 
                 case "4":
-                try (ObjectOutputStream buffer = new ObjectOutputStream(new FileOutputStream("Libros.dat"))) {
+                try (ObjectOutputStream buffer = new ObjectOutputStream(new FileOutputStream("Libros.dat",false))) {
                     buffer.writeObject(libros);
                     System.out.println("Libros guardados correctamente.");
                 } catch (IOException e) {
@@ -80,7 +83,7 @@ public class App {
                 default:
                     System.out.println("Inserta el numero de nuevo");
             }
-        } while (true);
+        } while (!opcion.equals("5"));
 
     }
     public static boolean isbnUnico(LinkedList<Libro> libros, String isbn){
@@ -98,11 +101,11 @@ public class App {
             Libro Libro = iterator.next();
             if (Libro.getIsbn().equals(isbn)) {
                 iterator.remove();
-                System.out.println("El producto se ha eliminado correctamente.");
+                System.out.println("El Libro se ha eliminado correctamente.");
                 return true;
             }
         }
-        System.out.println("Producto no encontrado.");
+        System.out.println("Libro no encontrado.");
         return false;
     }
 
