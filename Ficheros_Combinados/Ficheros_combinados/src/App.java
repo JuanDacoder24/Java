@@ -1,15 +1,17 @@
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
         
         Scanner teclado = new Scanner(System.in);
 		String opcion = "";
@@ -31,8 +33,21 @@ public class App {
 				case "1":
 					
 					break;
+
+				case "2":
+					
+					break;
+
+				case "3":
+					
+					break;
+
+				case "4":
+					System.out.println("Saliendo del programa, HASTA PRONTO");
+					break;
+
 				default:
-					throw new AssertionError();
+					System.out.println("Elegir el numero correcto");
 			}
 		} while (!opcion.equalsIgnoreCase("4"));
 
@@ -57,11 +72,6 @@ public class App {
 				productosLeidos.get(i).setIVA(IVA);
 				productosLeidos.get(i).setAplicarDto(aplicarDto);
 				
-				if(i < productosLeidos.size())
-				{
-					i++;
-				}
-				
 			}
 			
 		}catch(EOFException e)
@@ -85,7 +95,7 @@ public class App {
 		LinkedList<Producto> lineas = null;
 		if(pathFile != null && fileName != null)
 		{
-			lineas = new LinkedList<Producto>();
+			lineas = new LinkedList<>();
 			
 			try (FileReader file = new FileReader(pathFile+fileName);
 					BufferedReader buffer = new BufferedReader(file);)
@@ -114,4 +124,49 @@ public class App {
 		}
 		return lineas;
 }
+private static void escribirFicheroBinarioExamen(final String pathFile, String fileNameBinario) {
+		
+		try(FileOutputStream fichero = new FileOutputStream(pathFile+fileNameBinario, false);
+				DataOutputStream escritor = new DataOutputStream(fichero);)
+		{
+			
+			Producto p1 = new Producto(5,25.75,15,21,false);
+			Producto p2 = new Producto(15,55.95,5,21,true);
+			Producto p3 = new Producto(100,3.25,0,21,false);
+			Producto p4 = new Producto(300,0.95,0,21,false);
+			Producto p5 = new Producto(27,5.25,13,21,true);
+			
+			
+			LinkedList<Producto> productos = new LinkedList<Producto>();
+			
+			productos.add(p1);
+			productos.add(p2);
+			productos.add(p3);
+			productos.add(p4);
+			productos.add(p5);
+			
+			
+			for(Producto p : productos)
+			{
+
+				escritor.writeInt(p.getCantidad());
+				escritor.writeDouble(p.getPrecio());
+				escritor.writeInt(p.getDescuento());
+				escritor.writeInt(p.getIVA());
+				escritor.writeBoolean(p.isAplicarDto());
+			}
+	
+		}catch(IOException e) {
+			System.out.println("Ha ocurrido un error al I/O");
+			System.out.println(e.getMessage());
+			
+		}catch(Exception e)
+		{
+			System.out.println("Ha ocurrido un error inexperado");
+			System.out.println(e.getMessage());
+
+		}
+	}
+
 }
+

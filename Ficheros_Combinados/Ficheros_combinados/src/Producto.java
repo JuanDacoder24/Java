@@ -21,6 +21,14 @@ public class Producto {
         this.aplicarDto = aplicarDto;
     }
 
+    public Producto(int cantidad, double precio, int descuento,
+            int iVA, boolean aplicarDto) {
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.descuento = descuento;
+        IVA = iVA;
+        this.aplicarDto = aplicarDto;
+    }
     public String getReferencia() {
         return referencia;
     }
