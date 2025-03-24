@@ -1,40 +1,61 @@
 public class Producto {
 
     private String referencia;
+    private String nombre;
     private String descripcion;
     private String tipo;
     private int cantidad;
     private double precio;
     private int descuento;
-    private int IVA;
+    private int iva;
     private boolean aplicarDto;
+
     
+    public Producto(String referencia, String nombre, String descripcion, String tipo) {
+        this.referencia = referencia;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+    }
+
+    
+
+    public Producto(int cantidad, double precio, int descuento, int iva, boolean aplicarDto) {
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.descuento = descuento;
+        this.iva = iva;
+        this.aplicarDto = aplicarDto;
+    }
+
+
+
     public Producto(String referencia, String descripcion, String tipo, int cantidad, double precio, int descuento,
-            int iVA, boolean aplicarDto) {
+            int iva, boolean aplicarDto) {
         this.referencia = referencia;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.cantidad = cantidad;
         this.precio = precio;
         this.descuento = descuento;
-        IVA = iVA;
+        this.iva = iva;
         this.aplicarDto = aplicarDto;
     }
 
-    public Producto(int cantidad, double precio, int descuento,
-            int iVA, boolean aplicarDto) {
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.descuento = descuento;
-        IVA = iVA;
-        this.aplicarDto = aplicarDto;
-    }
     public String getReferencia() {
         return referencia;
     }
 
     public void setReferencia(String referencia) {
         this.referencia = referencia;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {
@@ -77,12 +98,12 @@ public class Producto {
         this.descuento = descuento;
     }
 
-    public int getIVA() {
-        return IVA;
+    public int getIva() {
+        return iva;
     }
 
-    public void setIVA(int iVA) {
-        IVA = iVA;
+    public void setIVA(int iva) {
+        this.iva = iva;
     }
 
     public boolean isAplicarDto() {
@@ -93,6 +114,15 @@ public class Producto {
         this.aplicarDto = aplicarDto;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Producto [referencia=" + referencia + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tipo="
+                + tipo + ", cantidad=" + cantidad + ", precio=" + precio + ", descuento=" + descuento + ", iva=" + iva
+                + ", aplicarDto=" + aplicarDto + "]";
+    }
+
+    public String escribirFicheroPlano(){
+        return referencia + "/" + nombre + "/" + descripcion + "/"+ tipo;
+    }
 
 }
