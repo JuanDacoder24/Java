@@ -25,8 +25,9 @@ public class SQLAccessMercaDaw {
                 int descuento = dataSet.getInt(7);
                 int iva = dataSet.getInt(8);
                 boolean aplicarDto = dataSet.getBoolean(9);
+                int idProducto = dataSet.getInt(10);
                 
-                Producto p1 = new Producto(id, referencia, nombre, descripcion, cantidad, precio, descuento, iva, aplicarDto);
+                Producto p1 = new Producto(id, referencia, nombre, descripcion, cantidad, precio, descuento, iva, aplicarDto, idProducto);
                 lista.add(p1);
             }
             
@@ -36,5 +37,8 @@ public class SQLAccessMercaDaw {
 
         return lista;
     }
+
+
+    
 
 }

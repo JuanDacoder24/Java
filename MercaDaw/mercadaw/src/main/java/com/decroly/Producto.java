@@ -11,9 +11,10 @@ public class Producto {
     private int descuento;
     private int iva;
     private boolean aplicarDto;
+    private int idProducto;
 
     public Producto(int id, String referencia, String nombre, String descripcion, int cantidad, double precio,
-            int descuento, int iva, boolean aplicarDto) {
+            int descuento, int iva, boolean aplicarDto, int idProducto) {
         this.id = id;
         this.referencia = referencia;
         this.nombre = nombre;
@@ -23,6 +24,7 @@ public class Producto {
         this.descuento = descuento;
         this.iva = iva;
         this.aplicarDto = false;
+        this.idProducto = idProducto;
 
     }
 
@@ -98,6 +100,15 @@ public class Producto {
         this.referencia = referencia;
     }
 
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    
     @Override
     public String toString() {
         return "Producto [id=" + id + ", referencia=" + referencia + ", nombre=" + nombre + ", descripcion="
@@ -105,6 +116,7 @@ public class Producto {
                 + iva + ", aplicarDto=" + aplicarDto + "]";
     }
 
+    
     
 
     
