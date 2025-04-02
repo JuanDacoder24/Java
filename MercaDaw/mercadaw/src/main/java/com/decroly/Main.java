@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         SQLAccessMercaDaw miMercaDaw = new SQLAccessMercaDaw();
         List<Producto> listas = miMercaDaw.mostrarLista();
 
-        Scanner teclado = new Scanner (System.in);
+        Scanner teclado = new Scanner(System.in);
         String opcion = "";
 
         do { 
@@ -27,7 +28,9 @@ public class Main {
 
             switch (opcion) {
                 case "1":
-                    
+                    for (Producto mn : listas) {
+                        System.out.println(mn);
+                    }
                     break;
                 
                 case "2":
@@ -43,7 +46,7 @@ public class Main {
                     break;
 
                 case "5":
-                    
+
                     break;
                 
                 case "6":

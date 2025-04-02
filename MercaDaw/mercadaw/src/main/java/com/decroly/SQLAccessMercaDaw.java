@@ -1,6 +1,7 @@
 package com.decroly;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
@@ -39,6 +40,27 @@ public class SQLAccessMercaDaw {
     }
 
 
+    public int insertarProducto(Producto producto){
+        int respuesta = -1;
+        String sqlStatement = "INSERT INTO productos (referencia, nombre, descripcion, cantidad, precio, descuento, iva, aplicarDto, id_tipo)" + "VALUES(?,?,?,?,?,?,?,?,?)";
+        try (Connection connection = SQLDataManager.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlStatement)) {
+            statement.setNString(1, producto.getReferencia());
+            statement.setNString(2, producto.getNombre());
+            statement.setNString(3, producto.getDescripcion());
+            statement.setInt(4, producto.getCantidad());
+            statement.setDouble(5, producto.getPrecio());
+            statement.setInt(6, producto.getDescuento());
+            statement.setInt(7, producto.getIva());
+            statement.setBoolean(8, producto.isAplicarDto());
+
+            respuesta = statement.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return respuesta;
+    }
     
 
 }

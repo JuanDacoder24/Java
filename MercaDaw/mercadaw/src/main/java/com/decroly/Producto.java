@@ -23,9 +23,8 @@ public class Producto {
         this.precio = precio;
         this.descuento = descuento;
         this.iva = iva;
-        this.aplicarDto = false;
+        this.aplicarDto = aplicarDto;
         this.idProducto = idProducto;
-
     }
 
     public int getId() {
@@ -108,14 +107,14 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    
     @Override
     public String toString() {
         return "Producto [id=" + id + ", referencia=" + referencia + ", nombre=" + nombre + ", descripcion="
                 + descripcion + ", cantidad=" + cantidad + ", precio=" + precio + ", descuento=" + descuento + ", iva="
-                + iva + ", aplicarDto=" + aplicarDto + "]";
+                + iva + ", aplicarDto=" + aplicarDto + ", idProducto=" + idProducto + "]";
     }
 
+    
     
     
 
