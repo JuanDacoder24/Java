@@ -3,11 +3,11 @@ package com.decroly;
 public class TipoProducto {
 
     private int idProducto;
-    private String nombre;
+    private String nombreTipo;
     
     public TipoProducto(int idProducto, String nombre) {
         this.idProducto = idProducto;
-        this.nombre = nombre;
+        this.nombreTipo = nombre;
     }
 
     public int getIdProducto() {
@@ -18,12 +18,12 @@ public class TipoProducto {
         this.idProducto = idProducto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreTipo() {
+        return nombreTipo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreTipo(String nombre) {
+        this.nombreTipo = nombre;
     }
 
 

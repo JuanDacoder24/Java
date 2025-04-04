@@ -2,13 +2,15 @@ package com.decroly;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
 
         SQLAccessMercaDaw miMercaDaw = new SQLAccessMercaDaw();
         List<Producto> listas = miMercaDaw.mostrarLista();
-
+        
         Scanner teclado = new Scanner(System.in);
         String opcion = "";
 
@@ -34,7 +36,14 @@ public class Main {
                     break;
                 
                 case "2":
-
+                    System.out.println("Introduce la referencia del producto:");
+                    String referencia = teclado.nextLine(); 
+                    Producto producto = miMercaDaw.buscarProductoPorRef(referencia); 
+                    if (producto != null) {
+                        System.out.println("Producto encontrado: " + producto.getNombre());
+                    } else {
+                        System.out.println("No se encontró ningún producto con esa referencia.");
+                    }
                     break;
                 
                 case "3":
@@ -71,5 +80,10 @@ public class Main {
 
         } while (!opcion.equalsIgnoreCase("9"));
 
+    }
+    public static boolean validRef(String referencia) {
+        Pattern pat = Pattern.compile("[A-Z]{3}[0-9]{3}");
+        Matcher mat = pat.matcher(referencia);
+        return mat.matches();
     }
 }
