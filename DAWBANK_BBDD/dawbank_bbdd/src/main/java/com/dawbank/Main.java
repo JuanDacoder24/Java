@@ -1,12 +1,16 @@
 package com.dawbank;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
+        SQLDataBaseManager.testConnection(); 
+
+        SQLAccessDawBank dawBank = new SQLAccessDawBank();
 
         Scanner teclado = new Scanner(System.in);
         System.out.println("***Bienvenido a TuBank***");
@@ -92,8 +96,12 @@ public class Main {
                         teclado = new Scanner(System.in);
                         double cantidad = teclado.nextDouble();
                         cuenta.ingresarMovimientos(cantidad);
+                        Movimiento movimiento = new Movimiento("Ingreso", cantidad);
+                        dawBank.registrarMovimiento(movimiento);
                     } catch (CuentaException e) {
                         System.out.println(e.getMessage());
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
                     break;
 
@@ -103,8 +111,12 @@ public class Main {
                         teclado = new Scanner(System.in);
                         double cantidad = teclado.nextDouble();
                         cuenta.retirarMovimientos(cantidad);
+                        Movimiento movimiento = new Movimiento("Retirada", cantidad);
+                        dawBank.registrarMovimiento(movimiento);
                     } catch (CuentaException e) {
                         System.out.println(e.getMessage());
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
                     break;
 

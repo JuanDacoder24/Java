@@ -9,7 +9,8 @@ public class Movimiento {
     private String tipo;
     private double cantidad;
 
-    public Movimiento (LocalDateTime fecha, String tipo, double cantidad){
+    public Movimiento (int id, LocalDateTime fecha, String tipo, double cantidad){
+        this.id = id;
         this.fecha = LocalDateTime.now();
         this.tipo = tipo; 
         this.cantidad = 0.0;

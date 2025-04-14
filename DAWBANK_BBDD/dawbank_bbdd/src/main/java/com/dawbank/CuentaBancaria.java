@@ -67,11 +67,9 @@ public class CuentaBancaria {
     }
 
     public void mostrarMovimiento() {
+        System.out.println("Movimientos realizados en la cuenta: ");
         for (Movimiento movimiento : movimientos) {
-            movimiento.toString();
-        }
-        if (movimientos.isEmpty()) {
-            System.out.println("No hay movimientos registrados.");
+            System.out.println(movimiento.toString());
         }
     }
 }
