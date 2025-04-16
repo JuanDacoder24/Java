@@ -1,6 +1,6 @@
 package com.dawbank;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Cliente extends Persona {
     
@@ -8,7 +8,7 @@ public class Cliente extends Persona {
     protected String email;
     protected String direccion;
 
-    public Cliente(String nombre, String dni, Date fechaNacimiento, String telefono, String email, String direccion) {
+    public Cliente(String nombre, String dni, LocalDate fechaNacimiento, String telefono, String email, String direccion) {
         super(nombre, dni, fechaNacimiento);
         this.telefono = telefono;
         this.email = email;

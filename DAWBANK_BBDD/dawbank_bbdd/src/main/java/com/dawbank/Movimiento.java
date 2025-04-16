@@ -54,7 +54,7 @@ public class Movimiento {
     }
     @Override
     public String toString() {
-        return "Movimiento [id=" + id + ", fecha=" + fecha + ", tipo=" + tipo + ", cantidad=" + cantidad + "]";
+        return "Movimiento [fecha=" + fecha + ", tipo=" + tipo + ", cantidad=" + cantidad + "]";
     }
 
 }

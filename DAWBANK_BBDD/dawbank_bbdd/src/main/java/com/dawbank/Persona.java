@@ -1,13 +1,13 @@
 package com.dawbank;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Persona {
     protected String nombre;
     protected String dni;
-    protected Date fechaNacimiento;
+    protected LocalDate fechaNacimiento;
     
-    public Persona(String nombre, String dni, Date fechaNacimiento) {
+    public Persona(String nombre, String dni, LocalDate fechaNacimiento) {
         this.nombre = nombre;
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
@@ -29,11 +29,11 @@ public class Persona {
         this.dni = dni;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

@@ -47,7 +47,7 @@ public class Main {
         System.out.println("Ingresa dirección del titular:");
         String direccion = teclado.nextLine();
 
-        Cliente titular = new Cliente(nombre, dni, java.sql.Date.valueOf(fechaNacimiento), telefono, email, direccion);
+        Cliente titular = new Cliente(nombre, dni, fechaNacimiento, telefono, email, direccion);
 
         CuentaBancaria cuenta = new CuentaBancaria(iban, titular);
 
