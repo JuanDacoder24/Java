@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainPanel" alignment="CENTER" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.ejemplofxclase.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <children>
+      <HBox fx:id="tittlePanel" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" text="Registrar persona" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Black" size="24.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Blend />
+         </effect>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox fx:id="cajaNombre" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label minWidth="150.0" text="Nombre">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="nameTextField" promptText="Insertar Nombre">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaApellidos" layoutX="30.0" layoutY="272.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label minWidth="150.0" text="Apellidos">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="lastNameTextField" promptText="Insertar Apellido">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaEdad" layoutX="30.0" layoutY="332.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label minWidth="150.0" text="Edad">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="ageTextField" promptText="Insertar Edad">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaEmail" layoutX="30.0" layoutY="402.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label minWidth="150.0" text="Email">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="emailTextField" promptText="Insertar Email">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaTelefono" layoutX="30.0" layoutY="417.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label minWidth="150.0" text="Telefono">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="numberTextField" promptText="Insertar Telefono">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaBotones" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="idguardar" mnemonicParsing="false" onAction="#onSaveButtonAction" style="-fx-background-color: #3355ff; -fx-text-fill: white;" text="Guardar" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="idcancelar" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onCloseButtonAction" style="-fx-background-color: ef233c;" text="Cancelar" textAlignment="CENTER" textFill="WHITE">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
