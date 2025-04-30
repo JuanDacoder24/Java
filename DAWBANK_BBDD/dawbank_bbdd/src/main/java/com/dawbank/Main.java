@@ -50,6 +50,12 @@ public class Main {
         Cliente titular = new Cliente(nombre, dni, fechaNacimiento, telefono, email, direccion);
 
         CuentaBancaria cuenta = new CuentaBancaria(iban, titular);
+        int resultado = dawBank.registrarCliente(titular);
+        if (resultado > 0) {
+            System.out.println("Cliente registrado exitosamente en la base de datos.");
+        } else {
+            System.out.println("Error al registrar el cliente en la base de datos.");
+        }
 
         String opcion = "";
 
