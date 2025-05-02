@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainPanel" alignment="CENTER" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.ejemplofxclase.HelloController">
+<VBox fx:id="mainPanel" alignment="CENTER" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ejemplofxclase.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -125,7 +125,7 @@
       </HBox>
       <HBox fx:id="cajaBotones" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="idguardar" mnemonicParsing="false" onAction="#onSaveButtonAction" style="-fx-background-color: #3355ff; -fx-text-fill: white;" text="Guardar" textFill="WHITE">
+            <Button fx:id="idguardar" mnemonicParsing="false" onAction="#onSaveButtonAction" styleClass="my-button" stylesheets="@../../../style.css" text="Guardar" textFill="WHITE">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
