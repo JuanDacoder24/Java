@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class SQLDateBaseManager {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/";
-    private static final String SCHEMA = "Proyecto_practica";
+    private static final String SCHEMA = "biblioteca";
     private static final String USUARIO = "root";
     private static final String CLAVE = "daw12";
 

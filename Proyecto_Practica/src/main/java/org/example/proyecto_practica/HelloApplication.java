@@ -11,13 +11,22 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch();
-    }
-}
+//        try (Connection connection = SQLDataBaseManager.getConnection()) {
+//            if (connection != null) {
+//                System.out.println("Conexión exitosa a la base de datos.");
+//                launch(args);
+//            } else {
+//                System.out.println("Error al conectar con la base de datos.");
+//            }    } catch (SQLException e) {
+//            System.out.println("Error al probar la conexión: " + e.getMessage());
+//        }}
+
+        launch(args);
+    }}

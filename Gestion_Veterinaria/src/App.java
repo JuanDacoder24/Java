@@ -6,10 +6,13 @@ public class App {
         
         Scanner teclado = new Scanner(System.in);
         Animal animal;
+
         Cita cita = new Cita();
+        System.out.println("Bienvenido a Veterinaria Mi Mascota");
 
         String nombre, especie, lugar, motivo, propietario;
         int edad;
+        
 
         Semana dia;
 
