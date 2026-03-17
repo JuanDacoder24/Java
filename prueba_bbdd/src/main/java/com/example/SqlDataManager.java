@@ -8,7 +8,7 @@ public class SqlDataManager {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/";
-    private static final String SCHEMA = "nombrebbdd";
+    private static final String SCHEMA = "almacen";
     private static final String USUARIO = "root";
     private static final String CLAVE = "daw12";
 
@@ -25,6 +25,8 @@ public class SqlDataManager {
         } catch(SQLException e){
             System.out.println("Error de sql: " + e.getMessage());
         }
+
+        System.out.println("Se ha establecido la conexion con la base de datos");
 
         return connection;
     }
