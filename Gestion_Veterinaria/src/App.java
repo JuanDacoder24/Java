@@ -13,7 +13,6 @@ public class App {
         String nombre, especie, lugar, motivo, propietario;
         int edad;
         
-
         Semana dia;
 
         String opcion = "";
