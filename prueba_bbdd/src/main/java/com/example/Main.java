@@ -9,8 +9,8 @@ public class Main {
         String opcion = "";
 
         //esto es para verificar que se conecta a la base de datos correctamente
-        SqlDataManager sqlDataManager = new SqlDataManager();           
-        System.out.println(sqlDataManager.getConnection());
+        SqlDataManager sql;
+        System.out.println("Probando conexion a la base de datos..." + SqlDataManager.getConnection());
 
         do { 
             System.out.println("1. Mostrar todos los Productos en el Inventario.");
@@ -25,8 +25,42 @@ public class Main {
 
             sc = new Scanner(System.in);
             opcion = sc.nextLine();
+
+            switch (opcion) {
+                case "1":
+                    
+                    break;
+
+                case "2":
+                    break;
+
+                case "3":
+                    break;
+
+                case "4":
+                    break;
+
+                case "5":
+                    break;
+
+                case "6":             
+                    break;
+
+                case "7":
+                    break;
+
+                case "8":
+                    break;
+                    
+                case "9":
+                    System.out.println("Saliendo del programa...");
+                    break;
+
+                default:
+                    throw new AssertionError();
+            }
             
-        } while (true);
+        } while (!opcion.equalsIgnoreCase("9"));
 
     }
 }
