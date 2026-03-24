@@ -10,23 +10,26 @@ import java.util.List;
 
 public class SQLAccessAlmacen {
 
-    public static List<String> getProductByReferencia() {
-        List<String> product = new LinkedList<>();
+    public static List<String> getProductByReferencia(String referencia) {
+    List<String> product = new LinkedList<>();
 
-        String sqlProductReferencia = "SELECT referencia FROM productos ";
+    String sqlProductReferencia = "SELECT referencia FROM productos WHERE referencia = ?";
 
-        try (Connection connection = SqlDataManager.getConnection(); Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(sqlProductReferencia)) {
+    try (Connection connection = SqlDataManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sqlProductReferencia)) {
 
-            while (resultSet.next()) {
-                product.add(resultSet.getNString(1));
-            }
+        statement.setString(1, referencia);
+        ResultSet resultSet = statement.executeQuery();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        while (resultSet.next()) {
+            product.add(resultSet.getString(1));
         }
-
-        return product;
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
     }
+
+    return product;
+}
 
     public static List<Producto> getProducts() {
         List<Producto> product = new LinkedList<>();
@@ -136,15 +139,14 @@ public class SQLAccessAlmacen {
         return productos;
     }
 
-    public static int deleteProductById(int id) {
+    public static int deleteProductByReferencia(String referencia) {
 
         int elements = -1;
 
-        String sqlDeleteProduct = "DELETE FROM productos WHERE id = ?";
-
+        String sqlDeleteProduct = "DELETE FROM productos WHERE referencia = ?";
         try (Connection connection = SqlDataManager.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sqlDeleteProduct)) {
 
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, referencia);
             elements = preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -171,6 +173,7 @@ public class SQLAccessAlmacen {
             preparedStatement.setBoolean(9, producto.isAplicarDto());
 
             response = preparedStatement.executeUpdate();
+
         } catch (Exception e) {
             System.out.println("error al insertar producto" + e.getMessage());
         }
