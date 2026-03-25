@@ -10,26 +10,43 @@ import java.util.List;
 
 public class SQLAccessAlmacen {
 
-    public static List<String> getProductByReferencia(String referencia) {
-    List<String> product = new LinkedList<>();
+    public static List<Producto> getProductByReferencia(String referencia) {
+        List<Producto> productos = new LinkedList<>();
 
-    String sqlProductReferencia = "SELECT referencia FROM productos WHERE referencia = ?";
+        String sql = "SELECT p.*, t.nombre FROM productos p JOIN tipos t ON p.tipo_id = t.id WHERE p.referencia = ?";
 
-    try (Connection connection = SqlDataManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement(sqlProductReferencia)) {
+        try (Connection connection = SqlDataManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)) {
 
-        statement.setString(1, referencia);
-        ResultSet resultSet = statement.executeQuery();
+            ps.setString(1, referencia);
 
-        while (resultSet.next()) {
-            product.add(resultSet.getString(1));
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String ref = rs.getString(2);
+                String nombre = rs.getString(3);
+                String descripcion = rs.getString(4);
+                int tipo_id = rs.getInt(5);
+                int cantidad = rs.getInt(6);
+                double precio = rs.getDouble(7);
+                int descuento = rs.getInt(8);
+                int iva = rs.getInt(9);
+                boolean aplicar_dto = rs.getBoolean(10);
+                String tipo_nombre = rs.getString(11);
+
+                Tipo tipo = new Tipo(tipo_id, tipo_nombre);
+
+                productos.add(new Producto(id, ref, nombre, descripcion, tipo, cantidad, precio, descuento, iva,
+                        aplicar_dto));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
 
-    return product;
-}
+        return productos;
+    }
 
     public static List<Producto> getProducts() {
         List<Producto> product = new LinkedList<>();
@@ -37,7 +54,9 @@ public class SQLAccessAlmacen {
         // tuve que modificar el tipo de consulta para poder agarrar el objeto tipo
         String sqlProducts = "SELECT p.*, t.nombre FROM productos p JOIN tipos t ON p.tipo_id = t.id";
 
-        try (Connection connection = SqlDataManager.getConnection(); Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(sqlProducts)) {
+        try (Connection connection = SqlDataManager.getConnection();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sqlProducts)) {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
@@ -65,14 +84,53 @@ public class SQLAccessAlmacen {
         return product;
     }
 
-    public static List<Producto> getProductosByTipo(int tipoId) {
+    public static List<Tipo> getTipos() {
+        List<Tipo> tipos = new LinkedList<>();
+        String sql = "SELECT id, nombre FROM tipos";
+        try (Connection connection = SqlDataManager.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nombre = resultSet.getString("nombre");
+                tipos.add(new Tipo(id, nombre));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener tipos: " + e.getMessage());
+        }
+        return tipos;
+    }
+
+    public static boolean isTipoIdExistente(int id) {
+        List<Tipo> tipos = getTipos();
+        for (Tipo tipo : tipos) {
+            if (tipo.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isTipoNombreExistente(String nombre) {
+        List<Tipo> tipos = getTipos();
+        for (Tipo tipo : tipos) {
+            if (tipo.getNombre().equalsIgnoreCase(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static List<Producto> getProductosByTipo(String nombreTipo) {
         List<Producto> productos = new LinkedList<>();
 
-        String sql = "SELECT p.*, t.nombre FROM productos p JOIN tipos t ON p.tipo_id = t.id WHERE p.tipo_id = ?";
+        String sql = "SELECT p.*, t.nombre FROM productos p JOIN tipos t ON p.tipo_id = t.id WHERE t.nombre = ?";
 
-        try (Connection connection = SqlDataManager.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = SqlDataManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1, tipoId);
+            ps.setString(1, nombreTipo);
 
             ResultSet rs = ps.executeQuery();
 
@@ -107,7 +165,8 @@ public class SQLAccessAlmacen {
 
         String sql = "SELECT p.*, t.nombre FROM productos p JOIN tipos t ON p.tipo_id = t.id WHERE p.cantidad = ?";
 
-        try (Connection connection = SqlDataManager.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = SqlDataManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setInt(1, cantidadBuscada);
 
@@ -144,7 +203,8 @@ public class SQLAccessAlmacen {
         int elements = -1;
 
         String sqlDeleteProduct = "DELETE FROM productos WHERE referencia = ?";
-        try (Connection connection = SqlDataManager.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sqlDeleteProduct)) {
+        try (Connection connection = SqlDataManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlDeleteProduct)) {
 
             preparedStatement.setString(1, referencia);
             elements = preparedStatement.executeUpdate();
@@ -161,7 +221,8 @@ public class SQLAccessAlmacen {
 
         String sqlInsertProduct = "INSERT INTO productos (referencia, nombre, descripcion, tipo_id, cantidad, precio, descuento, iva, aplicar_dto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = SqlDataManager.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sqlInsertProduct)) {
+        try (Connection connection = SqlDataManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlInsertProduct)) {
             preparedStatement.setString(1, producto.getReferencia());
             preparedStatement.setString(2, producto.getNombre());
             preparedStatement.setString(3, producto.getDescripcion());
@@ -174,8 +235,11 @@ public class SQLAccessAlmacen {
 
             response = preparedStatement.executeUpdate();
 
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Precio inválido, usa punto o coma para decimales. " + e.getMessage(), e);
+            
         } catch (Exception e) {
-            System.out.println("error al insertar producto" + e.getMessage());
+            System.out.println("error al insertar producto " + e.getMessage());
         }
         return response;
     }
@@ -186,7 +250,8 @@ public class SQLAccessAlmacen {
 
         String sqlInsertTipo = "INSERT INTO tipos (nombre) VALUES(?)";
 
-        try (Connection connection = SqlDataManager.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sqlInsertTipo)) {
+        try (Connection connection = SqlDataManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlInsertTipo)) {
 
             preparedStatement.setString(1, tipo.getNombre());
 
@@ -203,7 +268,8 @@ public class SQLAccessAlmacen {
 
         String sqlUpdateProduct = "UPDATE productos SET descripcion = ?, cantidad = ?, precio = ?, descuento = ?, aplicar_dto = ? WHERE id = ?";
 
-        try (Connection connection = SqlDataManager.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdateProduct)) {
+        try (Connection connection = SqlDataManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdateProduct)) {
             preparedStatement.setString(1, producto.getDescripcion());
             preparedStatement.setInt(2, producto.getCantidad());
             preparedStatement.setDouble(3, producto.getPrecio());
