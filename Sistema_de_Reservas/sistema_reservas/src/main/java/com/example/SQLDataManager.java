@@ -1,8 +1,9 @@
 package com.example;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,15 +23,21 @@ public class SQLDataManager {
         SQLDataManager sql = null;
 
         String DRIVER = "", URL = "", SCHEMA = "", USUARIO = "", CLAVE = "";
-
-
-            try (FileReader fichero = new FileReader("src/main/resources/application.dat");
-                BufferedReader lector = new BufferedReader(fichero)) {
+        InputStream resource = SQLDataManager.class.getResourceAsStream("/application.dat");
+        if (resource == null) {
+            System.out.println("No se encontró el archivo application.dat en el classpath.");
+            return null;
+        }
+        try (BufferedReader lector = new BufferedReader(new InputStreamReader(resource))) {
 
                 String linea = lector.readLine();
 
                 while (linea != null) {
                     String[] datos = linea.split(",");
+                    if (datos.length < 5) {
+                        System.out.println("Formato inválido en application.dat. Debe tener 5 valores separados por comas.");
+                        return null;
+                    }
                     DRIVER = datos[0];
                     URL = datos[1];
                     SCHEMA = datos[2];
@@ -61,12 +68,12 @@ public class SQLDataManager {
         return con;
     }
 
-    public SQLDataManager(String CLAVE, String DRIVER, String SCHEMA, String URL, String USUARIO) {
-        this.CLAVE = CLAVE;
+    public SQLDataManager(String DRIVER, String URL, String SCHEMA, String USUARIO, String CLAVE) {
         this.DRIVER = DRIVER;
-        this.SCHEMA = SCHEMA;
         this.URL = URL;
+        this.SCHEMA = SCHEMA;
         this.USUARIO = USUARIO;
+        this.CLAVE = CLAVE;
     }
 
     public String getDRIVER() {
@@ -88,7 +95,5 @@ public class SQLDataManager {
     public String getCLAVE() {
         return CLAVE;
     }
-
     
-
 }

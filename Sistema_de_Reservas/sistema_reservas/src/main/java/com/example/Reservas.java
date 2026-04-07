@@ -12,15 +12,16 @@ public class Reservas {
     private LocalDateTime horaInicio;
     private LocalDateTime horaFin;
     private Estado estado;
-
-    public Reservas(Estado estado, LocalDate fecha, LocalDateTime horaFin, LocalDateTime horaInicio, int id, int instalacionId, int usuarioId) {
-        this.estado = estado;
-        this.fecha = fecha;
-        this.horaFin = horaFin;
-        this.horaInicio = horaInicio;
+    
+    public Reservas(int id, int usuarioId, int instalacionId, LocalDate fecha, LocalDateTime horaInicio,
+            LocalDateTime horaFin, Estado estado) {
         this.id = id;
-        this.instalacionId = instalacionId;
         this.usuarioId = usuarioId;
+        this.instalacionId = instalacionId;
+        this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -81,7 +82,7 @@ public class Reservas {
 
     @Override
     public String toString() {
-        return "Reservas [id=" + id + ", usuarioId=" + usuarioId + ", instalacionId=" + instalacionId + ", fecha="
+        return "\n Reservas [id=" + id + ", usuarioId=" + usuarioId + ", instalacionId=" + instalacionId + ", fecha="
                 + fecha + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", estado=" + estado + "]";
     }
 
