@@ -80,9 +80,8 @@ public class SQLAccessReserva {
                 String nombre = resultSet.getString(2);
                 String email = resultSet.getString(3);
                 String password = resultSet.getString(4);
-                Rol rol = Rol.valueOf(resultSet.getString(5));
 
-                Usuarios usuario = new Usuarios(id, nombre, email, password, rol);
+                Usuarios usuario = new Usuarios(id, nombre, email, password);
                 usuarios.add(usuario);
             }
 
@@ -104,7 +103,6 @@ public class SQLAccessReserva {
             preparedStatement.setString(1, usuario.getNombre());
             preparedStatement.setString(2, usuario.getEmail());
             preparedStatement.setString(3, usuario.getPassword());
-            preparedStatement.setString(4, usuario.getRol().name());
 
             res = preparedStatement.executeUpdate();
 
@@ -115,29 +113,70 @@ public class SQLAccessReserva {
         return res;
     }
 
-    public static int reservarPista(Reservas reserva){
-        int res = -1;
-
-        String sqlReservarPista = "INSERT INTO reservas (usuario_id, instalacion_id, fecha, hora_inicio, hora_fin, estado) VALUES (?, ?, ?, ?, ?, ?)";
-
-        try(Connection connection = SQLDataManager.getConnection();
-            java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlReservarPista)){
-
-            preparedStatement.setInt(1, reserva.getId());
-            preparedStatement.setInt(2, reserva.getInstalacionId());
-            preparedStatement.setDate(3, java.sql.Date.valueOf(reserva.getFecha()));
-            preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(reserva.getHoraInicio()));
-            preparedStatement.setTimestamp(5, java.sql.Timestamp.valueOf(reserva.getHoraFin()));
-            preparedStatement.setString(6, reserva.getEstado().name());
-
-            res = preparedStatement.executeUpdate();
-
-        } catch(SQLException e){
-            System.out.println("SQLException: " + e.getMessage());
-        }
-
-        return res;
+    private static int reservarPista(Reservas reserva) { 
+    int res = -1;
+    
+    String sqlReservarPista = "INSERT INTO reservas (usuario_id, instalacion_id, fecha, hora_inicio, hora_fin, estado) VALUES (?, ?, ?, ?, ?, ?)";
+    
+    try(Connection connection = SQLDataManager.getConnection();
+        java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlReservarPista)){
+        
+        preparedStatement.setInt(1, reserva.getUsuarioId()); 
+        preparedStatement.setInt(2, reserva.getInstalacionId());
+        preparedStatement.setDate(3, java.sql.Date.valueOf(reserva.getFecha()));
+        preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(reserva.getHoraInicio()));
+        preparedStatement.setTimestamp(5, java.sql.Timestamp.valueOf(reserva.getHoraFin()));
+        preparedStatement.setString(6, reserva.getEstado().name());
+        
+        res = preparedStatement.executeUpdate();
+        
+    } catch(SQLException e){
+        System.out.println("SQLException: " + e.getMessage());
     }
+    
+    return res;
+}
+
+    public static boolean isPistaDisponible(int instalacionId, LocalDate fecha, LocalDateTime horaInicio, LocalDateTime horaFin) {
+    String sqlCheckDisponibilidad = "SELECT COUNT(*) FROM reservas WHERE instalacion_id = ? AND fecha = ? AND estado != 'CANCELADA' AND ((hora_inicio <= ? AND hora_fin > ?) OR (hora_inicio < ? AND hora_fin >= ?) OR (hora_inicio >= ? AND hora_fin <= ?))";
+    
+    try(Connection connection = SQLDataManager.getConnection();
+        java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlCheckDisponibilidad)) {
+        
+        // ESTOS SON LOS PARAMETROS PARA VER SI HAY SOLAPAMIENTO DE HORARIOS
+        preparedStatement.setInt(1, instalacionId);
+        preparedStatement.setDate(2, java.sql.Date.valueOf(fecha));
+        preparedStatement.setTimestamp(3, java.sql.Timestamp.valueOf(horaInicio));
+        preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(horaInicio));
+        preparedStatement.setTimestamp(5, java.sql.Timestamp.valueOf(horaFin));
+        preparedStatement.setTimestamp(6, java.sql.Timestamp.valueOf(horaFin));
+        preparedStatement.setTimestamp(7, java.sql.Timestamp.valueOf(horaInicio));
+        preparedStatement.setTimestamp(8, java.sql.Timestamp.valueOf(horaFin));
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            int reservasExistentes = resultSet.getInt(1);
+            return reservasExistentes == 0;
+        }
+        
+    } catch(SQLException e) {
+        System.out.println("SQLException al verificar disponibilidad: " + e.getMessage());
+    }
+    
+    return false;
+}
+
+public static int reservarPistaConVerificacion(Reservas reserva) {
+
+    if (!isPistaDisponible(reserva.getInstalacionId(), reserva.getFecha(), 
+        reserva.getHoraInicio(), reserva.getHoraFin())) {
+        System.out.println("La pista no está disponible en el horario solicitado");
+        return -2; 
+    }
+    
+    return reservarPista(reserva);
+}
 
     public static int updatePista(Instalaciones pista){
         int elements = -1;
@@ -150,6 +189,7 @@ public class SQLAccessReserva {
             preparedStatement.setString(1, pista.getNombre());
             preparedStatement.setDouble(2, pista.getPrecioHora());
             preparedStatement.setString(3, pista.getTipo().name());
+            
             preparedStatement.setInt(4, pista.getId());
 
             elements = preparedStatement.executeUpdate();

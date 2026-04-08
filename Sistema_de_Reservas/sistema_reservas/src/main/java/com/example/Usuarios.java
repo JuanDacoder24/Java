@@ -6,14 +6,12 @@ public class Usuarios {
     private String nombre;
     private String email;
     private String password;
-    private Rol rol;
 
-    public Usuarios(int id, String nombre, String email, String password, Rol rol) {
+    public Usuarios(int id, String nombre, String email, String password) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-        this.rol = rol;
     }
 
     public int getId() {
@@ -48,19 +46,11 @@ public class Usuarios {
         this.password = password;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
-
     @Override
     public String toString() {
-        return "\n Usuarios [id=" + id + ", nombre=" + nombre + ", email=" + email + ", password=" + password + ", rol="
-                + rol + "]";
+        return "\n Usuarios [id=" + id + ", nombre=" + nombre + ", email=" + email + ", password=" + password + "]";
     }
+
 
     
 
