@@ -1,6 +1,7 @@
 package com.example;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,6 +39,36 @@ public class SQLAccessReserva {
         }
 
         return reservas;
+    }
+
+    public static Reservas getReservaById(int id){
+        Reservas reserva = null;
+
+        String sqlReserva = "SELECT * FROM reservas WHERE id = ?";
+
+        try(Connection connection = SQLDataManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlReserva)){
+
+            preparedStatement.setInt(1, id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if (resultSet.next()) {
+                    int reservaId = resultSet.getInt(1);
+                    int usuario_id = resultSet.getInt(2);
+                    int instalacion_id = resultSet.getInt(3);
+                    LocalDate fecha = resultSet.getDate(4).toLocalDate();
+                    LocalDateTime hora_inicio = resultSet.getTimestamp(5).toLocalDateTime();
+                    LocalDateTime hora_fin = resultSet.getTimestamp(6).toLocalDateTime();
+                    Estado estado = Estado.valueOf(resultSet.getString(7));
+
+                    reserva = new Reservas(reservaId, usuario_id, instalacion_id, fecha, hora_inicio, hora_fin, estado);
+                }
+            }
+
+        } catch(SQLException e){
+            System.out.println("SQLException: " + e.getMessage());
+        }
+
+        return reserva;
     }
 
     public static List<Instalaciones> getPistas(){
@@ -95,7 +126,7 @@ public class SQLAccessReserva {
     public static int registarUsuario(Usuarios usuario){
         int res = -1;
 
-        String sqlRegistrarUsuario = "INSERT INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)";
+        String sqlRegistrarUsuario = "INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)";
 
         try(Connection connection = SQLDataManager.getConnection();
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlRegistrarUsuario)){
@@ -130,12 +161,14 @@ public class SQLAccessReserva {
         
         res = preparedStatement.executeUpdate();
         
-    } catch(SQLException e){
-        System.out.println("SQLException: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Precio inválido, usa punto o coma para decimales. " + e.getMessage(), e);
+            
+        } catch (Exception e) {
+            System.out.println("error al insertar reserva: " + e.getMessage());
+        }
+        return res;
     }
-    
-    return res;
-}
 
     public static boolean isPistaDisponible(int instalacionId, LocalDate fecha, LocalDateTime horaInicio, LocalDateTime horaFin) {
     String sqlCheckDisponibilidad = "SELECT COUNT(*) FROM reservas WHERE instalacion_id = ? AND fecha = ? AND estado != 'CANCELADA' AND ((hora_inicio <= ? AND hora_fin > ?) OR (hora_inicio < ? AND hora_fin >= ?) OR (hora_inicio >= ? AND hora_fin <= ?))";
@@ -171,7 +204,7 @@ public static int reservarPistaConVerificacion(Reservas reserva) {
 
     if (!isPistaDisponible(reserva.getInstalacionId(), reserva.getFecha(), 
         reserva.getHoraInicio(), reserva.getHoraFin())) {
-        System.out.println("La pista no está disponible en el horario solicitado");
+        System.out.println("La pista no está disponible en el horario seleccionado");
         return -2; 
     }
     
@@ -191,6 +224,35 @@ public static int reservarPistaConVerificacion(Reservas reserva) {
             preparedStatement.setString(3, pista.getTipo().name());
             
             preparedStatement.setInt(4, pista.getId());
+
+            elements = preparedStatement.executeUpdate();
+
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Precio inválido, usa punto o coma para decimales. " + e.getMessage(), e);
+            
+        } catch(SQLException e){
+            System.out.println("SQLException: " + e.getMessage());
+        }
+
+        return elements;
+    }
+
+    public static int updateReserva(Reservas reserva){
+        int elements = -1;
+
+        String sqlUpdateReserva = "UPDATE reservas SET usuario_id = ?, instalacion_id = ?, fecha = ?, hora_inicio = ?, hora_fin = ?, estado = ? WHERE id = ?";
+
+        try(Connection connection = SQLDataManager.getConnection();
+            java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdateReserva)){
+
+            preparedStatement.setInt(1, reserva.getUsuarioId());
+            preparedStatement.setInt(2, reserva.getInstalacionId());
+            preparedStatement.setDate(3, java.sql.Date.valueOf(reserva.getFecha()));
+            preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(reserva.getHoraInicio()));
+            preparedStatement.setTimestamp(5, java.sql.Timestamp.valueOf(reserva.getHoraFin()));
+            preparedStatement.setString(6, reserva.getEstado().name());
+            
+            preparedStatement.setInt(7, reserva.getId());
 
             elements = preparedStatement.executeUpdate();
 
