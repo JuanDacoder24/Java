@@ -1,0 +1,26 @@
+
+.my-background {
+    -fx-background-color: #7E8FB3;
+}
+
+.my-button {
+    -fx-background-color: #4545b1;  /* Color de fondo del botón */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-min-width: 100;
+    -fx-max-width: 100;
+    -fx-max-height: 50;
+    -fx-min-height: 50;
+    -fx-background-radius: 10;
+}
+
+.my-button:hover {
+    -fx-background-color: #196c77; /* Color de fondo al pasar el mouse */
+}
+
+.my-error-text{
+    -fx-border-color: red;
+}
+
+.my-tittle-view{
+
+}

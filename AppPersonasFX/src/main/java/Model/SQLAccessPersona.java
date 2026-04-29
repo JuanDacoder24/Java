@@ -6,6 +6,10 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
+import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
+
 public class SQLAccessPersona {
 
     public static List<Persona> getAllpersonas(){
@@ -45,6 +49,48 @@ public class SQLAccessPersona {
 
         return personas;
     }
+
+    public static List<Persona> getpersonasByNameContains(String name){
+        List<Persona> personas = new LinkedList<>();
+
+        //Sentencia SQL
+        String sqlpersonas = "SELECT * FROM person where name like ?";
+
+        try(Connection connection = SQLDataBaseManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sqlpersonas)){
+
+            statement.setString(1, name+"%");
+            ResultSet resultSets = statement.executeQuery();
+
+            while (resultSets.next()) {
+                String dni = resultSets.getNString(1);
+                String nameDB = resultSets.getNString(2);
+                String surname = resultSets.getNString(3);
+                String email = resultSets.getNString(4);
+                int age = resultSets.getInt(5);
+                String phone = resultSets.getNString(6);
+
+                //Uso de patron builder
+                Persona p = Persona.builder()
+                        .dni(dni)
+                        .name(nameDB)
+                        .surname(surname)
+                        .email(email)
+                        .age(age)
+                        .phone(phone)
+                        .build();
+
+                personas.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
+        return personas;
+    }
+
+
 
     public static Persona getPersonaByDni(String dni){
         Persona p = null;
@@ -114,7 +160,7 @@ public class SQLAccessPersona {
         return p;
     }
 
-    public boolean createPersona(Persona persona){
+    public static boolean createPersona(Persona persona){
         boolean result = false;
         String sqlInsertpersonas = "INSERT INTO person (dni, name, surname, email, age, phone) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
@@ -137,7 +183,7 @@ public class SQLAccessPersona {
         return result;
     }
 
-    public boolean updatePersona(Persona persona){
+    public static boolean updatePersona(Persona persona){
         boolean result = false;
         String sqlUpdatePersona = "UPDATE person set name = ?, surname = ?," +
                 "email = ?, age = ?, phone = ?  where dni = ?";
@@ -162,7 +208,7 @@ public class SQLAccessPersona {
         return result;
     }
 
-    public boolean deletePersonaByDNI(String dni){
+    public static boolean deletePersonaByDNI(String dni){
         boolean result = false;
         String sqlDeletepersonas = "DELETE FROM person WHERE dni = ?";
 
