@@ -1,67 +1,77 @@
 package Demo;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Mascota {
-
+public class Mascota implements Serializable {
     private String pasaporte;
     private String nombre;
-    private String fechanacimiento;
-    private String peso;
+    private LocalDate fechaNacimiento;
+    private double peso;
     private String tipo;
     private Propietario propietario;
 
-    public Mascota(String pasaporte, String nombre, String fechanacimiento, String peso, String tipo) {
+    public Mascota(String pasaporte, String nombre, LocalDate fechaNacimiento, double peso, String tipo, Propietario propietario) {
         this.pasaporte = pasaporte;
         this.nombre = nombre;
-        this.fechanacimiento = fechanacimiento;
+        this.fechaNacimiento = fechaNacimiento;
         this.peso = peso;
         this.tipo = tipo;
         this.propietario = propietario;
     }
 
-    public String getPasaporte() {
-        return pasaporte;
+    public Mascota(String pasaporte, String nombre, LocalDate fechaNacimiento, double peso, String tipo) {
+        this.pasaporte = pasaporte;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.peso = peso;
+        this.tipo = tipo;
     }
 
-    public void setPasaporte(String pasaporte) {
-        this.pasaporte = pasaporte;
+    public Mascota() {}
+
+    public String getPasaporte() {
+        return pasaporte;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public String getFechanacimiento() {
-        return fechanacimiento;
-    }
-
-    public void setFechanacimiento(String fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
-    }
-
-    public String getPeso() {
+    public double getPeso() {
         return peso;
-    }
-
-    public void setPeso(String peso) {
-        this.peso = peso;
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public Propietario getPropietario() {
         return propietario;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPasaporte(String pasaporte) {
+        this.pasaporte = pasaporte;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public void setPropietario(Propietario propietario) {
@@ -73,10 +83,10 @@ public class Mascota {
         return "Mascota{" +
                 "pasaporte='" + pasaporte + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", fechanacimiento=" + fechanacimiento +
+                ", fechaNacimiento=" + fechaNacimiento +
                 ", peso=" + peso +
                 ", tipo='" + tipo + '\'' +
-                ", propietario=" + propietario +
+                ", propietario=" + propietario+
                 '}';
     }
 }

@@ -128,7 +128,7 @@ public class HelloController {
         }else{
             Mascota m = new Mascota(pasaporte, nombre, fecha, peso, tipo);
             mascotas.add(m);
-            SQLAccess.añadirMascota(m);
+            SQLAccess.insertarMascota(m);
             showAlert("Exito, Mascota añadida correctamente");
             clearFields();
         }

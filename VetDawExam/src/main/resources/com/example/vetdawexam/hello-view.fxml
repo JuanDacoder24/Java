@@ -5,10 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,242 +14,408 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="menuPrincipal" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" styleClass="my-background" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.decroly.VetDawExam.MainController">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.decroly.VetDawExam.MainController">
+    <children>
+        <VBox fx:id="pantallaPrincipal" alignment="CENTER" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="20.0" style="-fx-background-color: black;" visible="false">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
 
-
-    <VBox fx:id="mainPanel" alignment="CENTER" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="20.0" styleClass="my-background" stylesheets="@../../../style.css" visible="false">
-        <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-        </padding>
-        <children>
-            <HBox fx:id="titlePanel" prefHeight="75.0" prefWidth="200.0">
-                <children>
-                    <Label prefHeight="71.0" prefWidth="852.0" styleClass="my-title" text="Inserte nueva Persona" textFill="#2612a8">
-                        <font>
-                            <Font name="Arial Black" size="48.0" />
-                        </font>
-                    </Label>
-                </children>
-            </HBox>
-            <Separator prefWidth="200.0" styleClass="my-separator" />
-            <HBox fx:id="nameHBox" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="200.0">
-                <children>
-                    <Label text="Nombre">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                        <HBox.margin>
-                            <Insets left="10.0" />
-                        </HBox.margin>
-                    </Label>
-                    <TextField fx:id="nameTextField" prefHeight="25.0" prefWidth="400.0">
-                        <HBox.margin>
-                            <Insets left="25.0" />
-                        </HBox.margin>
-                    </TextField>
-                </children>
-                <VBox.margin>
-                    <Insets left="25.0" />
-                </VBox.margin>
-            </HBox>
-            <HBox fx:id="surNameHBox" alignment="CENTER_LEFT" layoutX="55.0" layoutY="291.0" prefHeight="35.0" prefWidth="200.0">
-                <children>
-                    <Label text="Apellidos">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                        <HBox.margin>
-                            <Insets left="10.0" />
-                        </HBox.margin>
-                    </Label>
-                    <TextField fx:id="surNameTextField" prefHeight="25.0" prefWidth="400.0">
-                        <HBox.margin>
-                            <Insets left="18.0" />
-                        </HBox.margin>
-                    </TextField>
-                </children>
-                <VBox.margin>
-                    <Insets left="25.0" />
-                </VBox.margin>
-            </HBox>
-            <HBox fx:id="surNameHBox1" alignment="CENTER_LEFT" layoutX="55.0" layoutY="191.0" prefHeight="35.0" prefWidth="200.0">
-                <children>
-                    <Label text="DNI">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                        <HBox.margin>
-                            <Insets left="10.0" />
-                        </HBox.margin>
-                    </Label>
-                    <TextField fx:id="dniTextField" prefHeight="25.0" prefWidth="400.0">
-                        <HBox.margin>
-                            <Insets left="60.0" />
-                        </HBox.margin>
-                    </TextField>
-                </children>
-                <VBox.margin>
-                    <Insets left="25.0" />
-                </VBox.margin>
-            </HBox>
-            <HBox fx:id="ageHBox" alignment="CENTER_LEFT" layoutX="55.0" layoutY="319.0" prefHeight="35.0" prefWidth="200.0">
-                <children>
-                    <Label text="Edad">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                        <HBox.margin>
-                            <Insets left="10.0" />
-                        </HBox.margin>
-                    </Label>
-                    <TextField fx:id="ageTextField" prefHeight="25.0" prefWidth="400.0">
-                        <HBox.margin>
-                            <Insets left="52.0" />
-                        </HBox.margin>
-                    </TextField>
-                </children>
-                <VBox.margin>
-                    <Insets left="25.0" />
-                </VBox.margin>
-            </HBox>
-            <HBox fx:id="emailHBox" alignment="CENTER_LEFT" layoutX="55.0" layoutY="347.0" prefHeight="35.0" prefWidth="200.0">
-                <children>
-                    <Label text="Email">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                        <HBox.margin>
-                            <Insets left="10.0" />
-                        </HBox.margin>
-                    </Label>
-                    <TextField fx:id="emailTextField" prefHeight="25.0" prefWidth="400.0">
-                        <HBox.margin>
-                            <Insets left="50.0" />
-                        </HBox.margin>
-                    </TextField>
-                </children>
-                <VBox.margin>
-                    <Insets left="25.0" />
-                </VBox.margin>
-            </HBox>
-            <HBox fx:id="emailHBox1" alignment="CENTER_LEFT" layoutX="55.0" layoutY="375.0" prefHeight="35.0" prefWidth="200.0">
-                <children>
-                    <Label text="Telefono">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                        <HBox.margin>
-                            <Insets left="10.0" />
-                        </HBox.margin>
-                    </Label>
-                    <TextField fx:id="phoneTextField" prefHeight="25.0" prefWidth="400.0">
-                        <HBox.margin>
-                            <Insets left="22.0" />
-                        </HBox.margin>
-                    </TextField>
-                </children>
-                <VBox.margin>
-                    <Insets left="25.0" />
-                </VBox.margin>
-            </HBox>
-            <Separator prefWidth="200.0" styleClass="my-separator" />
-            <HBox fx:id="buttonsHBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                <children>
-                    <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#onSaveButtonAction" styleClass="my-button" text="Guardar">
-                        <padding>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                        </padding>
-                        <cursor>
-                            <Cursor fx:constant="HAND" />
-                        </cursor>
-                    </Button>
-                    <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#onCloseButtonAction" styleClass="my-button-secondary" text="Volver">
-                        <HBox.margin>
-                            <Insets left="25.0" right="70.0" />
-                        </HBox.margin>
-                        <padding>
-                            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-                        </padding>
-                        <cursor>
-                            <Cursor fx:constant="HAND" />
-                        </cursor>
-                    </Button>
-                </children>
-            </HBox>
-        </children>
-    </VBox>
-    <VBox fx:id="listPersonsPanel" prefHeight="200.0" prefWidth="100.0" styleClass="my-background" stylesheets="@../../../style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <children>
-            <Label styleClass="my-title" stylesheets="@../../../style.css" text="Personas en la App">
-                <VBox.margin>
-                    <Insets left="25.0" />
-                </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                <children>
-                    <ListView fx:id="personListView" editable="true" maxHeight="360.0" maxWidth="600.0" minHeight="346.0" minWidth="600.0" prefHeight="360.0" prefWidth="600.0" />
-                </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" maxWidth="640.0" minWidth="640.0" prefHeight="100.0" prefWidth="200.0">
-                <children>
-                    <Button fx:id="SavePeopleBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="my-button" stylesheets="@../../../style.css" text="Editar">
-                        <HBox.margin>
-                            <Insets right="20.0" />
-                        </HBox.margin>
-                    </Button>
-                    <Button fx:id="removeSelectedBtn" mnemonicParsing="false" onAction="#OnRemoveSelecteditemsAction" styleClass="my-button-remove" stylesheets="@../../../style.css" text="Eliminar">
-                        <HBox.margin>
-                            <Insets right="20.0" />
-                        </HBox.margin>
-                    </Button>
-                    <Button fx:id="backBtnListPeople" mnemonicParsing="false" onAction="#OnBackBtnListPeopleAction" styleClass="my-button-secondary" stylesheets="@../../../style.css" text="Volver">
-                        <HBox.margin>
-                            <Insets right="25.0" />
-                        </HBox.margin>
-                    </Button>
-                </children>
-                <VBox.margin>
-                    <Insets right="35.0" />
-                </VBox.margin>
-            </HBox>
-        </children>
-    </VBox>
-    <GridPane fx:id="startPanel" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="376.0" styleClass="my-background" stylesheets="@../../../style.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.66668701171875" minWidth="10.0" prefWidth="206.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="503.0" minWidth="10.0" prefWidth="228.0" />
-         <ColumnConstraints hgrow="SOMETIMES" maxWidth="503.0" minWidth="10.0" prefWidth="206.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="264.0" minHeight="0.0" prefHeight="264.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="240.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-        <children>
-            <Label alignment="CENTER" prefHeight="74.0" prefWidth="548.0" text="VetDaw" textAlignment="JUSTIFY" textFill="#6858ae" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+            <Label text="VetDaw" textFill="#b109ff">
                 <font>
-                    <Font name="Cooper Black" size="64.0" />
+                    <Font name="System Bold Italic" size="81.0" />
                 </font>
-            <GridPane.margin>
-               <Insets />
-            </GridPane.margin>
             </Label>
-            <Separator prefHeight="3.0" prefWidth="488.0" styleClass="my-separator" stylesheets="@../../../style.css" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-            <Button fx:id="registerMBtn" mnemonicParsing="false" onAction="#OnRegisterBtnAction" style="-fx-background-color: #32634e;" styleClass="my-button" text="Registrar Mascotas" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="viewPeopleBtn" mnemonicParsing="false" onAction="#onViewPeopleAction" style="-fx-background-color: #32634e;" styleClass="my-button" text="Buscar Mascotas" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="btnSaveInFile" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnBtnSaveInFile" style="-fx-background-color: #87654f;" styleClass="my-button" text="Exportar datos" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Button fx:id="btnExitApp" mnemonicParsing="false" onAction="#OnBtnExitApp" style="-fx-background-color: d30c0c;" styleClass="my-button-remove" text="Salir App" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-         <ImageView fitHeight="229.0" fitWidth="266.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-            <image>
-               <Image url="@../../../../../../../../../Desktop/Recursos_examen_3EVA/mascotas_5.png" />
-            </image>
-            <GridPane.margin>
-               <Insets />
-            </GridPane.margin>
-         </ImageView>
-         <Button fx:id="registerPBtn" mnemonicParsing="false" onAction="#OnRegisterBtnAction" style="-fx-background-color: #32634e;" styleClass="my-button" text="Registrar Propietarios" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-         <Button fx:id="registerCBtn" contentDisplay="CENTER" layoutX="83.0" layoutY="443.0" mnemonicParsing="false" onAction="#OnBtnSaveInFile" style="-fx-background-color: #87654f;" styleClass="my-button" text="Registrar Consulta" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        </children>
-    </GridPane>
+            <GridPane prefHeight="343.0" prefWidth="601.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="11.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <children>
+                    <Button fx:id="BotonRegistrarMascota" alignment="CENTER" onAction="#onAccederRegistrarMacota" prefHeight="50.0" prefWidth="161.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Registrar Mascota" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <font>
+                            <Font name="System Bold Italic" size="12.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                    <Button fx:id="botonRegistrarUsuario" mnemonicParsing="false" onAction="#onAccederRegistrarPropietario" prefHeight="50.0" prefWidth="161.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Registrar Propietario" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                    <Button fx:id="botonRegistrarConsulta" mnemonicParsing="false" onAction="#onAccederRegistrarConsulta" prefHeight="50.0" prefWidth="161.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Registrar Consulta" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                    <Button mnemonicParsing="false" onAction="#onAccederBuscarMascota" prefHeight="50.0" prefWidth="161.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Buscar Mascota" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor></Button>
+                    <Button fx:id="botonExportar" mnemonicParsing="false" onAction="#onExportarDatos" prefHeight="40.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Exportar Datos" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor></Button>
+                    <Button fx:id="botonSalirApp" mnemonicParsing="false" onAction="#onSalirApp" styleClass="btn-principal" stylesheets="@../../../style.css" text="Salir App" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor></Button>
+                </children>
+            </GridPane>
+        </VBox>
+        <VBox fx:id="RegistroMascota" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" visible="false">
+            <children>
+                <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="404.0" text="REGISTRAR MASCOTA">
+                    <font>
+                        <Font size="38.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="120.0" />
+                    </VBox.margin>
+                </Label>
+                <GridPane prefHeight="317.0" prefWidth="641.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="550.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="450.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Pasaporte" GridPane.halignment="RIGHT">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Nombre" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Peso" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Fecha de Nacimiento" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Propietario (DNI)" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Tipo" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="MascotaPasaporte" GridPane.columnIndex="1">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="MascotaNombre" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="MascotaPeso" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="250.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="MascotaFNacimiento" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="MascotaTipo" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <ListView fx:id="MascotaPropietario" prefHeight="68.0" prefWidth="378.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="30.0" />
+                            </GridPane.margin>
+                        </ListView>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" top="50.0" />
+                    </VBox.margin>
+                </GridPane>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onBotonGuardarMascota" styleClass="btn-principal" stylesheets="@../../../style.css" text="Guardar">
+                            <HBox.margin>
+                                <Insets left="220.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroMascota" styleClass="btn-salir" stylesheets="@../../../style.css" text="Volver">
+                            <HBox.margin>
+                                <Insets left="30.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="50.0" />
+                    </VBox.margin>
+                </HBox>
+            </children></VBox>
+        <VBox fx:id="RegistroPropietario" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" visible="false">
+            <children>
+                <Label contentDisplay="CENTER" prefHeight="55.0" prefWidth="451.0" text="REGISTRAR PROPIETARIO">
+                    <font>
+                        <Font size="38.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="120.0" />
+                    </VBox.margin>
+                </Label>
+                <GridPane prefHeight="190.0" prefWidth="608.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="550.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="450.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Nombre" GridPane.halignment="RIGHT">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Apellido" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="dni" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="telefono" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="email" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="direccion" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="PropietarioNombre" GridPane.columnIndex="1">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="PropietarioApellido" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="PropietarioDni" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="250.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="PropietarioTelefono" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="PropietarioDireccion" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="PropietarioEmail" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" top="50.0" />
+                    </VBox.margin>
+                </GridPane>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onBotonGuardarPropietario" styleClass="btn-principal" stylesheets="@../../../style.css" text="Guardar">
+                            <HBox.margin>
+                                <Insets left="220.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroPropietario" styleClass="btn-salir" stylesheets="@../../../style.css" text="Volver">
+                            <HBox.margin>
+                                <Insets left="30.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="50.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+        <VBox fx:id="RegistroConsulta" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" visible="false">
+            <children>
+                <Label contentDisplay="CENTER" prefHeight="55.0" prefWidth="451.0" text="REGISTRAR CONSULTA">
+                    <font>
+                        <Font size="38.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="120.0" />
+                    </VBox.margin>
+                </Label>
+                <GridPane prefHeight="190.0" prefWidth="608.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="550.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="450.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="60.0" minHeight="30.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Fecha" GridPane.halignment="RIGHT">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Duracion" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Observaciones" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Mascota" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="System Bold Italic" size="15.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="ConsultaFecha" GridPane.columnIndex="1">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="ConsultaDuracion" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="200.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="ConsultaObservaciones" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="250.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <ListView fx:id="ConsultaMascota" prefHeight="72.0" prefWidth="340.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <GridPane.margin>
+                                <Insets left="10.0" right="30.0" />
+                            </GridPane.margin>
+                        </ListView>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" top="50.0" />
+                    </VBox.margin>
+                </GridPane>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onBotonGuardarConsulta" styleClass="btn-principal" stylesheets="@../../../style.css" text="Guardar">
+                            <HBox.margin>
+                                <Insets left="220.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroConsulta" styleClass="btn-salir" stylesheets="@../../../style.css" text="Volver">
+                            <HBox.margin>
+                                <Insets left="30.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="50.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+        <VBox fx:id="BusquedaMascota" prefHeight="480.0" prefWidth="640.0">
+            <children>
+                <Label contentDisplay="CENTER" text="Buscar Mascota">
+                    <font>
+                        <Font name="System Bold Italic" size="43.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Label text="Introduce el pasaporte">
+                            <font>
+                                <Font name="System Bold Italic" size="19.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="150.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="BuscarMascota">
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </TextField>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="50.0" />
+                    </VBox.margin>
+                </HBox>
+                <Button mnemonicParsing="false" onAction="#onBuscarMascota" text="Buscar">
+                    <VBox.margin>
+                        <Insets left="300.0" top="-40.0" />
+                    </VBox.margin>
+                </Button>
+                <ListView fx:id="ResultadoBusqueda" prefHeight="100.0" prefWidth="200.0">
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                    </VBox.margin>
+                </ListView>
+                <Button mnemonicParsing="false" onAction="#onVolverBuscar" text="Volver">
+                    <VBox.margin>
+                        <Insets left="300.0" top="20.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>
