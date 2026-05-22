@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,20 +14,35 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.decroly.VetDawExam.MainController">
+<AnchorPane xmlns="http://javafx.com/javafx/1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vetdawexam.HelloController">
     <children>
-        <VBox fx:id="pantallaPrincipal" alignment="CENTER" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="20.0" style="-fx-background-color: black;" visible="false">
+        <!-- Pantalla Principal -->
+        <VBox fx:id="pantallaPrincipal" alignment="CENTER" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="30.0" style="-fx-background: linear-gradient(to bottom right, #1a1a2e, #16213e); -fx-background-radius: 10;" visible="false">
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
             </padding>
 
-            <Label text="VetDaw" textFill="#b109ff">
+            <effect>
+                <DropShadow radius="20" color="#00000050" offsetX="0" offsetY="5"/>
+            </effect>
+
+            <Label text=" VetDaw" textFill="#c4b5fd" style="-fx-font-weight: bold;">
                 <font>
-                    <Font name="System Bold Italic" size="81.0" />
+                    <Font name="System Bold Italic" size="72.0" />
                 </font>
             </Label>
-            <GridPane prefHeight="343.0" prefWidth="601.0">
+
+            <Separator prefWidth="300.0" style="-fx-background-color: #c4b5fd;" />
+
+            <Label text="Sistema de Gestión Veterinaria" textFill="#a78bfa" style="-fx-font-size: 14px;">
+                <font>
+                    <Font name="System" size="14.0" />
+                </font>
+            </Label>
+
+            <GridPane prefHeight="343.0" prefWidth="601.0" hgap="20" vgap="20">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -37,385 +53,260 @@
                     <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="11.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <children>
-                    <Button fx:id="BotonRegistrarMascota" alignment="CENTER" onAction="#onAccederRegistrarMacota" prefHeight="50.0" prefWidth="161.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Registrar Mascota" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <Button fx:id="BotonRegistrarMascota" alignment="CENTER" onAction="#onAccederRegistrarMacota" prefHeight="60.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(to right, #8b5cf6, #6d28d9); -fx-background-radius: 30; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Registrar Mascota" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <font>
-                            <Font name="System Bold Italic" size="12.0" />
+                            <Font name="System Bold" size="14.0" />
                         </font>
                         <cursor>
                             <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
-                    <Button fx:id="botonRegistrarUsuario" mnemonicParsing="false" onAction="#onAccederRegistrarPropietario" prefHeight="50.0" prefWidth="161.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Registrar Propietario" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+
+                    <Button fx:id="botonRegistrarUsuario" mnemonicParsing="false" onAction="#onAccederRegistrarPropietario" prefHeight="60.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(to right, #ec4899, #be185d); -fx-background-radius: 30; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Registrar Propietario" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <cursor>
                             <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
-                    <Button fx:id="botonRegistrarConsulta" mnemonicParsing="false" onAction="#onAccederRegistrarConsulta" prefHeight="50.0" prefWidth="161.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Registrar Consulta" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+
+                    <Button fx:id="botonRegistrarConsulta" mnemonicParsing="false" onAction="#onAccederRegistrarConsulta" prefHeight="60.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(to right, #10b981, #059669); -fx-background-radius: 30; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Registrar Consulta" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <cursor>
                             <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
-                    <Button mnemonicParsing="false" onAction="#onAccederBuscarMascota" prefHeight="50.0" prefWidth="161.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Buscar Mascota" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+
+                    <Button mnemonicParsing="false" onAction="#onAccederBuscarMascota" prefHeight="60.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(to right, #f59e0b, #d97706); -fx-background-radius: 30; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Buscar Mascota" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <cursor>
                             <Cursor fx:constant="HAND" />
-                        </cursor></Button>
-                    <Button fx:id="botonExportar" mnemonicParsing="false" onAction="#onExportarDatos" prefHeight="40.0" styleClass="btn-principal" stylesheets="@../../../style.css" text="Exportar Datos" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        </cursor>
+                    </Button>
+
+                    <Button fx:id="botonExportar" mnemonicParsing="false" onAction="#onExportarDatos" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(to right, #3b82f6, #1e40af); -fx-background-radius: 30; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;" text=" Exportar Datos" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <cursor>
                             <Cursor fx:constant="HAND" />
-                        </cursor></Button>
-                    <Button fx:id="botonSalirApp" mnemonicParsing="false" onAction="#onSalirApp" styleClass="btn-principal" stylesheets="@../../../style.css" text="Salir App" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        </cursor>
+                    </Button>
+
+                    <Button fx:id="botonSalirApp" mnemonicParsing="false" onAction="#onSalirApp" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(to right, #ef4444, #b91c1c); -fx-background-radius: 30; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;" text=" Salir App" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <cursor>
                             <Cursor fx:constant="HAND" />
-                        </cursor></Button>
+                        </cursor>
+                    </Button>
                 </children>
             </GridPane>
         </VBox>
-        <VBox fx:id="RegistroMascota" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" visible="false">
-            <children>
-                <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="404.0" text="REGISTRAR MASCOTA">
-                    <font>
-                        <Font size="38.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets left="120.0" />
-                    </VBox.margin>
-                </Label>
-                <GridPane prefHeight="317.0" prefWidth="641.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="550.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="450.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Label text="Pasaporte" GridPane.halignment="RIGHT">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="Nombre" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="Peso" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="Fecha de Nacimiento" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="Propietario (DNI)" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Tipo" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="MascotaPasaporte" GridPane.columnIndex="1">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="MascotaNombre" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="MascotaPeso" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="250.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="MascotaFNacimiento" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="MascotaTipo" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <ListView fx:id="MascotaPropietario" prefHeight="68.0" prefWidth="378.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="30.0" />
-                            </GridPane.margin>
-                        </ListView>
-                    </children>
-                    <VBox.margin>
-                        <Insets left="20.0" top="50.0" />
-                    </VBox.margin>
-                </GridPane>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button mnemonicParsing="false" onAction="#onBotonGuardarMascota" styleClass="btn-principal" stylesheets="@../../../style.css" text="Guardar">
-                            <HBox.margin>
-                                <Insets left="220.0" />
-                            </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroMascota" styleClass="btn-salir" stylesheets="@../../../style.css" text="Volver">
-                            <HBox.margin>
-                                <Insets left="30.0" />
-                            </HBox.margin>
-                        </Button>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="50.0" />
-                    </VBox.margin>
-                </HBox>
-            </children></VBox>
-        <VBox fx:id="RegistroPropietario" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" visible="false">
-            <children>
-                <Label contentDisplay="CENTER" prefHeight="55.0" prefWidth="451.0" text="REGISTRAR PROPIETARIO">
-                    <font>
-                        <Font size="38.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets left="120.0" />
-                    </VBox.margin>
-                </Label>
-                <GridPane prefHeight="190.0" prefWidth="608.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="550.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="450.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Label text="Nombre" GridPane.halignment="RIGHT">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="Apellido" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="dni" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="telefono" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="email" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="direccion" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="PropietarioNombre" GridPane.columnIndex="1">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="PropietarioApellido" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="PropietarioDni" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="250.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="PropietarioTelefono" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="PropietarioDireccion" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="PropietarioEmail" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                    </children>
-                    <VBox.margin>
-                        <Insets left="20.0" top="50.0" />
-                    </VBox.margin>
-                </GridPane>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button mnemonicParsing="false" onAction="#onBotonGuardarPropietario" styleClass="btn-principal" stylesheets="@../../../style.css" text="Guardar">
-                            <HBox.margin>
-                                <Insets left="220.0" />
-                            </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroPropietario" styleClass="btn-salir" stylesheets="@../../../style.css" text="Volver">
-                            <HBox.margin>
-                                <Insets left="30.0" />
-                            </HBox.margin>
-                        </Button>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="50.0" />
-                    </VBox.margin>
-                </HBox>
-            </children>
-        </VBox>
-        <VBox fx:id="RegistroConsulta" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" visible="false">
-            <children>
-                <Label contentDisplay="CENTER" prefHeight="55.0" prefWidth="451.0" text="REGISTRAR CONSULTA">
-                    <font>
-                        <Font size="38.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets left="120.0" />
-                    </VBox.margin>
-                </Label>
-                <GridPane prefHeight="190.0" prefWidth="608.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="550.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="450.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="60.0" minHeight="30.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Label text="Fecha" GridPane.halignment="RIGHT">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="Duracion" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="Observaciones" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label text="Mascota" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="ConsultaFecha" GridPane.columnIndex="1">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="ConsultaDuracion" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="200.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="ConsultaObservaciones" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="250.0" />
-                            </GridPane.margin>
-                        </TextField>
-                        <ListView fx:id="ConsultaMascota" prefHeight="72.0" prefWidth="340.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="30.0" />
-                            </GridPane.margin>
-                        </ListView>
-                    </children>
-                    <VBox.margin>
-                        <Insets left="20.0" top="50.0" />
-                    </VBox.margin>
-                </GridPane>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button mnemonicParsing="false" onAction="#onBotonGuardarConsulta" styleClass="btn-principal" stylesheets="@../../../style.css" text="Guardar">
-                            <HBox.margin>
-                                <Insets left="220.0" />
-                            </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroConsulta" styleClass="btn-salir" stylesheets="@../../../style.css" text="Volver">
-                            <HBox.margin>
-                                <Insets left="30.0" />
-                            </HBox.margin>
-                        </Button>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="50.0" />
-                    </VBox.margin>
-                </HBox>
-            </children>
-        </VBox>
-        <VBox fx:id="BusquedaMascota" prefHeight="480.0" prefWidth="640.0">
-            <children>
-                <Label contentDisplay="CENTER" text="Buscar Mascota">
-                    <font>
-                        <Font name="System Bold Italic" size="43.0" />
-                    </font>
-                </Label>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Label text="Introduce el pasaporte">
-                            <font>
-                                <Font name="System Bold Italic" size="19.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets left="150.0" />
-                            </HBox.margin>
-                        </Label>
-                        <TextField fx:id="BuscarMascota">
-                            <HBox.margin>
-                                <Insets left="20.0" />
-                            </HBox.margin>
-                        </TextField>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="50.0" />
-                    </VBox.margin>
-                </HBox>
-                <Button mnemonicParsing="false" onAction="#onBuscarMascota" text="Buscar">
-                    <VBox.margin>
-                        <Insets left="300.0" top="-40.0" />
-                    </VBox.margin>
+
+        <!-- Registro de Mascota -->
+        <VBox fx:id="RegistroMascota" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" style="-fx-background: linear-gradient(to bottom, #1a1a2e, #16213e); -fx-background-radius: 10;" visible="false" spacing="20">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20"/>
+            </padding>
+
+            <Label alignment="CENTER" contentDisplay="CENTER" text=" REGISTRAR MASCOTA" textFill="#c4b5fd" style="-fx-font-weight: bold;">
+                <font>
+                    <Font size="32.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="10" />
+                </VBox.margin>
+            </Label>
+
+            <Separator style="-fx-background-color: #c4b5fd;" />
+
+            <GridPane hgap="15" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="200.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="350.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+
+                <children>
+                    <Label text=" Pasaporte:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT"/>
+                    <Label text=" Nombre:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+                    <Label text="⚖ Peso (kg):" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+                    <Label text=" Fecha Nacimiento:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
+                    <Label text=" Tipo:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="4"/>
+                    <Label text=" Propietario:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="5"/>
+
+                    <TextField fx:id="MascotaPasaporte" promptText="Ej: P123456" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1"/>
+                    <TextField fx:id="MascotaNombre" promptText="Nombre de la mascota" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <TextField fx:id="MascotaPeso" promptText="Ej: 15.5" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <TextField fx:id="MascotaFNacimiento" promptText="YYYY-MM-DD" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <TextField fx:id="MascotaTipo" promptText="Ej: Perro, Gato, etc." style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <ListView fx:id="MascotaPropietario" prefHeight="70.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #c4b5fd;" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                </children>
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Button mnemonicParsing="false" onAction="#onBotonGuardarMascota" style="-fx-background-color: linear-gradient(to right, #10b981, #059669); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Guardar" prefWidth="120" prefHeight="40">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
                 </Button>
-                <ListView fx:id="ResultadoBusqueda" prefHeight="100.0" prefWidth="200.0">
-                    <VBox.margin>
-                        <Insets left="20.0" right="20.0" top="20.0" />
-                    </VBox.margin>
-                </ListView>
-                <Button mnemonicParsing="false" onAction="#onVolverBuscar" text="Volver">
-                    <VBox.margin>
-                        <Insets left="300.0" top="20.0" />
-                    </VBox.margin>
+                <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroMascota" style="-fx-background-color: linear-gradient(to right, #6b7280, #4b5563); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Volver" prefWidth="120" prefHeight="40">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
                 </Button>
-            </children>
+            </HBox>
+        </VBox>
+
+        <!-- Registro de Propietario -->
+        <VBox fx:id="RegistroPropietario" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" style="-fx-background: linear-gradient(to bottom, #1a1a2e, #16213e); -fx-background-radius: 10;" visible="false" spacing="20">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20"/>
+            </padding>
+
+            <Label alignment="CENTER" text=" REGISTRAR PROPIETARIO" textFill="#c4b5fd" style="-fx-font-weight: bold;">
+                <font>
+                    <Font size="32.0" />
+                </font>
+            </Label>
+
+            <Separator style="-fx-background-color: #c4b5fd;" />
+
+            <GridPane hgap="15" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="200.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="350.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+
+                <children>
+                    <Label text=" Nombre:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT"/>
+                    <Label text=" Apellido:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+                    <Label text=" DNI:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+                    <Label text=" Teléfono:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
+                    <Label text=" Dirección:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="4"/>
+                    <Label text=" Email:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="5"/>
+
+                    <TextField fx:id="PropietarioNombre" promptText="Nombre" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1"/>
+                    <TextField fx:id="PropietarioApellido" promptText="Apellido" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <TextField fx:id="PropietarioDni" promptText="12345678A" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <TextField fx:id="PropietarioTelefono" promptText="612345678" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <TextField fx:id="PropietarioDireccion" promptText="Calle, número, ciudad" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <TextField fx:id="PropietarioEmail" promptText="correo@ejemplo.com" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                </children>
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Button mnemonicParsing="false" onAction="#onBotonGuardarPropietario" style="-fx-background-color: linear-gradient(to right, #10b981, #059669); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Guardar" prefWidth="120" prefHeight="40">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroPropietario" style="-fx-background-color: linear-gradient(to right, #6b7280, #4b5563); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Volver" prefWidth="120" prefHeight="40">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </HBox>
+        </VBox>
+
+        <!-- Registro de Consulta -->
+        <VBox fx:id="RegistroConsulta" maxHeight="480.0" maxWidth="640.0" prefHeight="480.0" prefWidth="640.0" style="-fx-background: linear-gradient(to bottom, #1a1a2e, #16213e); -fx-background-radius: 10;" visible="false" spacing="20">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20"/>
+            </padding>
+
+            <Label alignment="CENTER" text=" REGISTRAR CONSULTA" textFill="#c4b5fd" style="-fx-font-weight: bold;">
+                <font>
+                    <Font size="32.0" />
+                </font>
+            </Label>
+
+            <Separator style="-fx-background-color: #c4b5fd;" />
+
+            <GridPane hgap="15" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="200.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="350.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+
+                <children>
+                    <Label text=" Fecha:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT"/>
+                    <Label text=" Duración (min):" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+                    <Label text=" Observaciones:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+                    <Label text=" Mascota:" textFill="#a78bfa" style="-fx-font-weight: bold;" GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
+
+                    <TextField fx:id="ConsultaFecha" promptText="YYYY-MM-DD" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1"/>
+                    <TextField fx:id="ConsultaDuracion" promptText="Ej: 30" style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <TextField fx:id="ConsultaObservaciones" promptText="Motivo de la consulta, síntomas, etc." style="-fx-background-radius: 20; -fx-padding: 8 15;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <ListView fx:id="ConsultaMascota" prefHeight="70.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #c4b5fd;" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                </children>
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Button mnemonicParsing="false" onAction="#onBotonGuardarConsulta" style="-fx-background-color: linear-gradient(to right, #10b981, #059669); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="💾 Guardar" prefWidth="120" prefHeight="40">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#onBotonVolverRegistroConsulta" style="-fx-background-color: linear-gradient(to right, #6b7280, #4b5563); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="↩️ Volver" prefWidth="120" prefHeight="40">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </HBox>
+        </VBox>
+
+        <!-- Búsqueda de Mascota -->
+        <VBox fx:id="BusquedaMascota" prefHeight="480.0" prefWidth="640.0" style="-fx-background: linear-gradient(to bottom, #1a1a2e, #16213e); -fx-background-radius: 10;" spacing="20">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20"/>
+            </padding>
+
+            <Label alignment="CENTER" contentDisplay="CENTER" text=" Buscar Mascota" textFill="#c4b5fd" style="-fx-font-weight: bold;">
+                <font>
+                    <Font size="38.0" />
+                </font>
+            </Label>
+
+            <Separator style="-fx-background-color: #c4b5fd;" />
+
+            <VBox alignment="CENTER" spacing="15">
+                <Label text="Introduce el número de pasaporte" textFill="#a78bfa" style="-fx-font-size: 16px;">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+
+                <HBox alignment="CENTER" spacing="15">
+                    <TextField fx:id="BuscarMascota" promptText="Ej: P123456" prefWidth="250" style="-fx-background-radius: 25; -fx-padding: 10 20; -fx-font-size: 14px;"/>
+                    <Button mnemonicParsing="false" onAction="#onBuscarMascota" style="-fx-background-color: linear-gradient(to right, #3b82f6, #1e40af); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Buscar" prefWidth="120" prefHeight="40">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                </HBox>
+
+                <ListView fx:id="ResultadoBusqueda" prefHeight="200" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #c4b5fd; -fx-font-size: 13px;"/>
+
+                <Button mnemonicParsing="false" onAction="#onVolverBuscar" style="-fx-background-color: linear-gradient(to right, #6b7280, #4b5563); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text=" Volver al Menú" prefWidth="150" prefHeight="40">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </VBox>
         </VBox>
     </children>
 </AnchorPane>

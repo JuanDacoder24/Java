@@ -13,8 +13,14 @@ import java.sql.SQLException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                HelloApplication.class.getResource("/com/example/vetdawexam/hello-view.fxml")
+        );
+
+        Scene scene = new Scene(fxmlLoader.load());
+
+        stage.setTitle("VetDawExam");
         stage.setScene(scene);
         stage.show();
     }

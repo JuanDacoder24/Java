@@ -13,7 +13,7 @@ public class SQLAccess {
         String getMascota = "INSERT INTO Mascota (Pasaporte, Nombre, Peso, FechaNacimiento, Propietario_dni, Tipo_idTipo) " +
                 "VALUES (?, ?, ?, ?, ?, ?);";
 
-        try (Connection connection = SQLDatabaseManager.getConnection();
+        try (Connection connection = SQLDataBaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(getMascota)) {
 
             statement.setString(1, mascota.getPasaporte());
@@ -38,7 +38,7 @@ public class SQLAccess {
         String getPropietario = "INSERT INTO Propietario (dni, Nombre, Apellido, Telefono, Direcion, Email) " +
                 "VALUES (?, ?, ?, ?, ?, ?);";
 
-        try (Connection connection = SQLDatabaseManager.getConnection();
+        try (Connection connection = SQLDataBaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(getPropietario)) {
 
             statement.setString(1, propietario.getDni());
@@ -63,7 +63,7 @@ public class SQLAccess {
         String getPropietario = "INSERT INTO Consulta (Fecha, Duracion, Observaciones, Mascota_Pasaporte) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection connection = SQLDatabaseManager.getConnection();
+        try (Connection connection = SQLDataBaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(getPropietario)) {
 
             statement.setDate(1, java.sql.Date.valueOf(consulta.getFecha()));
@@ -85,7 +85,7 @@ public class SQLAccess {
 
         String getMascota = "SELECT * FROM Mascota WHERE Pasaporte = ?";
 
-        try (Connection connection = SQLDatabaseManager.getConnection();
+        try (Connection connection = SQLDataBaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(getMascota)) {
 
             statement.setString(1, pasaporte);
@@ -116,7 +116,7 @@ public class SQLAccess {
 
         String getArticulos = "SELECT * FROM Propietario ";
 
-        try (Connection connection = SQLDatabaseManager.getConnection(); Statement statement = connection.createStatement();
+        try (Connection connection = SQLDataBaseManager.getConnection(); Statement statement = connection.createStatement();
              ResultSet dataSet = statement.executeQuery(getArticulos);) {
 
             while (dataSet.next()) {
@@ -139,7 +139,7 @@ public class SQLAccess {
 
         String getMascota = "SELECT * FROM Mascota ";
 
-        try (Connection connection = SQLDatabaseManager.getConnection(); Statement statement = connection.createStatement();
+        try (Connection connection = SQLDataBaseManager.getConnection(); Statement statement = connection.createStatement();
              ResultSet dataSet = statement.executeQuery(getMascota);) {
 
 
