@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.HelloController">
+    <stylesheets>
+        <!-- Asegúrate de que la ruta apunte a donde guardaste tu archivo CSS -->
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <VBox fx:id="PanelPropietario" prefHeight="600.0" prefWidth="900.0" visible="false">
+            <children>
+                <AnchorPane prefHeight="600.0" prefWidth="906.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="94.0" prefWidth="905.0" text="Registrar Propietario">
+                            <font>
+                                <Font size="32.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="DNIPropietario" layoutX="228.0" layoutY="170.0" promptText="Dni" />
+                        <TextField fx:id="NombrePropietario" layoutX="540.0" layoutY="170.0" promptText="Nombre" />
+                        <TextField fx:id="ApellidoPropietario" layoutX="228.0" layoutY="287.0" promptText="Apellido" />
+                        <TextField fx:id="TelefonoPropietario" layoutX="547.0" layoutY="287.0" promptText="Telefono" />
+                        <TextField fx:id="DireccionPropietario" layoutX="228.0" layoutY="398.0" promptText="Direccion" />
+                        <TextField fx:id="EmailPropietario" layoutX="540.0" layoutY="398.0" promptText="Email" />
+                        <Button layoutX="697.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#BotonVolver" styleClass="button-secondary" text="Volver" />
+                        <Button layoutX="421.0" layoutY="497.0" mnemonicParsing="false" onMouseClicked="#RegistrarPropietario" text="Registrar" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+        <VBox fx:id="PanelBotones" prefHeight="600.0" prefWidth="900.0" visible="false">
+            <children>
+                <AnchorPane prefHeight="602.0" prefWidth="900.0">
+                    <children>
+                        <Button layoutX="254.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#BotonRegistrarMascota" text="Registrar Mascota" />
+                        <Button layoutX="567.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#BotonRegistrarConsulta" text="Registrar Consulta" />
+                        <Button layoutX="254.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#BotonRegistrarPropietario" text="Registrar Propietario" />
+                        <Button layoutX="567.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#BotonListaMascotas" text="Buscar Mascota" />
+                        <Button layoutX="254.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#ExportarDatos" text="Exportar Datos" />
+                        <Button layoutX="567.0" layoutY="450.0" mnemonicParsing="false" styleClass="button-secondary" text="Salir" />
+                    </children>
+                </AnchorPane>
+            </children></VBox>
+        <VBox fx:id="PanelMascota" prefHeight="601.0" prefWidth="900.0" visible="false">
+            <children>
+                <AnchorPane prefHeight="604.0" prefWidth="900.0">
+                    <children>
+                        <TextField fx:id="PasaporteMascota" layoutX="170.0" layoutY="168.0" promptText="Pasaporte" />
+                        <TextField fx:id="NombreMascota" layoutX="538.0" layoutY="168.0" promptText="Nombre" />
+                        <TextField fx:id="PesoMascota" layoutX="171.0" layoutY="289.0" promptText="Peso" />
+                        <TextField fx:id="DNIMascota" layoutX="539.0" layoutY="289.0" promptText="DNI del Propietario" />
+                        <DatePicker fx:id="FechaNMascota" layoutX="158.0" layoutY="389.0" promptText="Fecha Nacimiento" />
+                        <ComboBox fx:id="TipoMascota" layoutX="539.0" layoutY="389.0" prefWidth="150.0" promptText="Tipo" />
+                        <Button layoutX="653.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#BotonVolver" styleClass="button-secondary" text="Volver" />
+                        <Button layoutX="407.0" layoutY="507.0" mnemonicParsing="false" onMouseClicked="#RegistrarMascota" text="Registrar" />
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="900.0" text="Registrar Mascota">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+        <VBox fx:id="PanelConsulta" prefHeight="602.0" prefWidth="900.0" visible="false">
+            <children>
+                <AnchorPane prefHeight="601.0" prefWidth="904.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="98.0" prefWidth="904.0" text="Registrar Consulta">
+                            <font>
+                                <Font size="32.0" />
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="FechaConsulta" layoutX="518.0" layoutY="275.0" promptText="Fecha" />
+                        <TextField fx:id="HoraConsulta" layoutX="357.0" layoutY="359.0" promptText="HH:mm" />
+                        <TextField fx:id="DuracionConsulta" layoutX="184.0" layoutY="192.0" promptText="Duracion" />
+                        <TextField fx:id="ObservacionesConsulta" layoutX="531.0" layoutY="192.0" promptText="Observaciones" />
+                        <TextField fx:id="PasaporteConsulta" layoutX="184.0" layoutY="275.0" promptText="Pasaporte Mascota" />
+                        <Button layoutX="667.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#BotonVolver" styleClass="button-secondary" text="Volver" />
+                        <Button layoutX="406.0" layoutY="491.0" mnemonicParsing="false" onMouseClicked="#RegistrarConsulta" text="Registrar" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+        <VBox fx:id="PanelBuscarMascotas" prefHeight="600.0" prefWidth="900.0">
+            <children>
+                <AnchorPane prefHeight="598.0" prefWidth="902.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="85.0" prefWidth="902.0" text="Lista de Mascotas">
+                            <font>
+                                <Font size="32.0" />
+                            </font>
+                        </Label>
+                        <ListView fx:id="ListaMascotas" layoutX="79.0" layoutY="96.0" prefHeight="288.0" prefWidth="726.0" />
+                        <TextField fx:id="PasaporteBuscar" layoutX="98.0" layoutY="448.0" promptText="Pasaporte" />
+                        <Button fx:id="BuscarMascota" layoutX="283.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#BuscarMascota" text="Buscar" />
+                        <TextField fx:id="BuscarNombreMascota" layoutX="442.0" layoutY="423.0" promptText="Nombre" />
+                        <TextField fx:id="PesoBuscarMascota" layoutX="443.0" layoutY="499.0" promptText="Peso" />
+                        <Button fx:id="ActualizarCampos" layoutX="619.0" layoutY="423.0" mnemonicParsing="false" onMouseClicked="#ActualizarCampos" text="Actualizar" />
+                        <Button layoutX="619.0" layoutY="499.0" mnemonicParsing="false" text="Eliminar" /> <!-- Cambiado de "Button" a "Eliminar" por lógica visual -->
+                        <Button layoutX="764.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#BotonVolver" styleClass="button-secondary" text="Volver" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
