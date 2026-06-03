@@ -1,0 +1,84 @@
+/* Configuración general de la ventana */
+.root {
+    -fx-background-color: #f4f6f9;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* Estilos para las etiquetas de título */
+.label {
+    -fx-text-fill: #2c3e50;
+    -fx-font-weight: bold;
+}
+
+/* Campos de texto (TextField, DatePicker, ComboBox) */
+.text-field, .date-picker, .combo-box {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #495057;
+}
+
+/* Efecto cuando el usuario hace clic en un input */
+.text-field:focused, .date-picker:focused, .combo-box:focused {
+    -fx-border-color: #4a90e2;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(74, 144, 226, 0.2), 5, 0, 0, 0);
+}
+
+/* Botón Principal (Registrar, Buscar, Actualizar) */
+.button {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #27ae60;
+}
+
+.button:pressed {
+    -fx-background-color: #1e7e34;
+}
+
+/* Estilo especial para los botones de "Volver" o "Salir" (Estilo secundario) */
+.button-secondary {
+    -fx-background-color: #95a5a6;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #7f8c8d;
+}
+
+/* Lista de mascotas */
+.list-view {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8px;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8px;
+    -fx-padding: 5px;
+}
+
+.list-cell {
+    -fx-padding: 10px;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #2d3748;
+    -fx-border-color: transparent transparent #edf2f7 transparent;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #f7fafc;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #ebf8ff;
+    -fx-text-fill: #2b6cb0;
+    -fx-font-weight: bold;
+}

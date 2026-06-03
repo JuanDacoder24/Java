@@ -1,7 +1,5 @@
 package com.example.eventapp;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDateTime;
