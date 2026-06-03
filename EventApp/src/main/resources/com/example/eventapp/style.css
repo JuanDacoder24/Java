@@ -1,17 +1,26 @@
-/* Configuración general de la ventana */
+/* =========================================================================
+   CONFIGURACIÓN GENERAL DE LA VENTANA
+   ========================================================================= */
 .root {
     -fx-background-color: #f4f6f9;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* Estilos para las etiquetas de título */
+/* Estilos para las etiquetas de texto */
 .label {
     -fx-text-fill: #2c3e50;
     -fx-font-weight: bold;
 }
 
-/* Campos de texto (TextField, DatePicker, ComboBox) */
-.text-field, .date-picker, .combo-box {
+/* =========================================================================
+   CAMPOS DE TEXTO E INPUTS (TextField, DatePicker, ComboBox)
+   ========================================================================= */
+/* Corrección: En JavaFX, los ComboBox y DatePicker heredan de clases base distintas.
+   Añadimos selectores internos para que el padding y los bordes no rompan el diseño */
+.text-field,
+.date-picker,
+.combo-box,
+.combo-box-base {
     -fx-background-color: #ffffff;
     -fx-background-radius: 5px;
     -fx-border-color: #ced4da;
@@ -22,16 +31,28 @@
     -fx-text-fill: #495057;
 }
 
-/* Efecto cuando el usuario hace clic en un input */
-.text-field:focused, .date-picker:focused, .combo-box:focused {
+/* Corrección de herencia visual interna para el cuadro de texto del DatePicker */
+.date-picker > .text-field {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+}
+
+/* Efecto Focus cuando el usuario hace clic o escribe en un input */
+.text-field:focused,
+.date-picker:focused,
+.combo-box:focused,
+.combo-box-base:focused {
     -fx-border-color: #4a90e2;
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(three-pass-box, rgba(74, 144, 226, 0.2), 5, 0, 0, 0);
 }
 
+/* =========================================================================
+   BOTONES (Principal y Secundario)
+   ========================================================================= */
 /* Botón Principal (Registrar, Buscar, Actualizar) */
 .button {
-    -fx-background-color: #2ecc71;
+    -fx-background-color: #2e63cc;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
@@ -41,14 +62,14 @@
 }
 
 .button:hover {
-    -fx-background-color: #27ae60;
+    -fx-background-color: #272eae;
 }
 
 .button:pressed {
-    -fx-background-color: #1e7e34;
+    -fx-background-color: #1e2e7e;
 }
 
-/* Estilo especial para los botones de "Volver" o "Salir" (Estilo secundario) */
+/* Estilo especial para los botones de "Volver" o "Salir" */
 .button-secondary {
     -fx-background-color: #95a5a6;
 }
@@ -57,7 +78,14 @@
     -fx-background-color: #7f8c8d;
 }
 
-/* Lista de mascotas */
+.button-secondary:pressed {
+    -fx-background-color: #616a6b;
+}
+
+/* =========================================================================
+   LISTADO DE EVENTOS (ListView y celdas internas)
+   ========================================================================= */
+/* CORREGIDO: Renombrado el bloque de contexto de 'mascotas' a 'eventos' */
 .list-view {
     -fx-background-color: #ffffff;
     -fx-background-radius: 8px;
@@ -70,13 +98,17 @@
     -fx-padding: 10px;
     -fx-background-color: #ffffff;
     -fx-text-fill: #2d3748;
+    /* Pinta una línea sutil de separación gris claro debajo de cada evento */
     -fx-border-color: transparent transparent #edf2f7 transparent;
 }
 
+/* Comportamiento al pasar el ratón por encima de un evento de la lista */
 .list-cell:filled:hover {
     -fx-background-color: #f7fafc;
+    -fx-cursor: hand;
 }
 
+/* Comportamiento estético cuando seleccionas un evento para editarlo */
 .list-cell:filled:selected {
     -fx-background-color: #ebf8ff;
     -fx-text-fill: #2b6cb0;

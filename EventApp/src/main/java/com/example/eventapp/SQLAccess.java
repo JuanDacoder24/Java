@@ -1,5 +1,8 @@
 package com.example.eventapp;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -130,29 +133,50 @@ public class SQLAccess {
     }
 
     // 4B. Obtener la lista completa de eventos si falla la búsqueda directa
-    public List<Evento> obtenerTodosEventos(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM evento";
-        List<Evento> lista = new ArrayList<>();
+    public ObservableList<Evento> obtenerTodosEventos() throws SQLException {
+        String sql = "SELECT codigo_interno, titulo, fecha_hora, aforo_maximo, precio_entrada, organizador_dni, tipo_evento FROM evento";
+        ObservableList<Evento> eventos = FXCollections.observableArrayList();
 
-        try (PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection connection = SQLManager.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) { // Al meter el ResultSet en el try-with-resources se cierra solo automáticamente
+
             while (rs.next()) {
-                String cod = rs.getString("codigo_interno");
+                // 1. Extraemos los datos primitivos de la tabla 'evento'
+                String codigo = rs.getString("codigo_interno");
                 String titulo = rs.getString("titulo");
-                LocalDateTime fecha = rs.getTimestamp("fecha_hora").toLocalDateTime();
-                int aforo = rs.getInt("aforo_maximo");
-                double precio = rs.getDouble("precio_entrada");
+
+                // Convertimos el DATETIME de MySQL a LocalDateTime de Java
+                java.sql.Timestamp timestamp = rs.getTimestamp("fecha_hora");
+                java.time.LocalDateTime fechaHora = (timestamp != null) ? timestamp.toLocalDateTime() : null;
+
+                int aforoMaximo = rs.getInt("aforo_maximo");
+                double precioEntrada = rs.getDouble("precio_entrada");
+
+                // 2. Extraemos las cadenas que hacen de claves foráneas
                 String organizadorDni = rs.getString("organizador_dni");
-                String tipoEvento = rs.getString("tipo_evento");
+                String nombreTipo = rs.getString("tipo_evento");
 
-                // Construimos la jerarquía de objetos en base a los String de la BD
-                Tipo tipoObj = new Tipo(tipoEvento);
-                Asistente organizadorObj = new Asistente("", "", organizadorDni, "", "", tipoObj);
+                // 3. ¡Construimos la jerarquía en cascada!
+                // Creamos el objeto Tipo usando tu clase limpia con solo el String
+                Tipo tipoObjeto = new Tipo(nombreTipo);
 
-                lista.add(new Evento(cod, titulo, fecha, aforo, precio, organizadorObj));
+                // Creamos el Asistente organizador pasándole su DNI y el tipo que acabamos de crear
+                // Dejamos los campos de texto vacíos ("") porque no los necesitamos para listar en la tabla
+                Asistente organizador = new Asistente("", "", organizadorDni, "", "", tipoObjeto);
+
+                // 4. Instanciamos el Evento completo pasando el organizador anidado
+                Evento evento = new Evento(codigo, titulo, fechaHora, aforoMaximo, precioEntrada, organizador);
+
+                // 5. Lo añadimos a la lista de JavaFX
+                eventos.add(evento);
             }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener la lista de eventos: " + e.getMessage());
+            throw e; // Volvemos a lanzar la excepción para que el controlador pueda manejarla o mostrar una alerta
         }
-        return lista;
+
+        return eventos;
     }
 
     // 4C. Modificar única y exclusivamente el aforo y el precio del entrada
