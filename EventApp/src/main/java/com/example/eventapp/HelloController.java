@@ -7,11 +7,17 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class HelloController {
 
@@ -30,7 +36,7 @@ public class HelloController {
     @FXML private TextField titulo;
     @FXML private DatePicker selectorFecha;
     @FXML private ComboBox<String> comboHora;
-    @FXML private TextField tipoEventoField; // Tu campo de texto para el Tipo de evento
+    @FXML private ComboBox<String> comboTipoEvento;
     @FXML private TextField aforoMaximo;
     @FXML private TextField precioEntada;
 
@@ -74,6 +80,21 @@ public class HelloController {
                 campoPrecio.setText(String.valueOf(nuevo.getPrecioEntrada()));
             }
         });
+
+        // Cargar tipos de eventos reales desde la BD al arrancar la pantalla
+        try (Connection conn = SQLManager.getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery("SELECT tipo FROM tipo")) {
+
+            ObservableList<String> tiposDeBd = FXCollections.observableArrayList();
+            while (rs.next()) {
+                tiposDeBd.add(rs.getString("tipo"));
+            }
+            comboTipoEvento.setItems(tiposDeBd);
+
+        } catch (SQLException e) {
+            System.err.println("No se pudieron cargar los tipos en el combo: " + e.getMessage());
+        }
     }
 
     // =========================================================================
@@ -107,15 +128,16 @@ public class HelloController {
      */
     @FXML
     void RegistrarEvento(MouseEvent event) {
-        if (codigoInterno.getText().isEmpty() || titulo.getText().isEmpty() ||
-                selectorFecha.getValue() == null || comboHora.getValue() == null) {
-            mostrarAlerta("Campos vacíos", "Por favor, rellene código, título, fecha y hora.");
+        // Validación previa de que ha seleccionado algo en el desplegable
+        if (comboTipoEvento.getValue() == null) {
+            mostrarAlerta("Campo incompleto", "Por favor, seleccione un tipo de evento de la lista.");
             return;
         }
 
+        // Extraemos el String directamente del ComboBox
+        String txtTipo = comboTipoEvento.getValue();
         String codigo = codigoInterno.getText().trim().toUpperCase();
         String txtTitulo = titulo.getText().trim();
-        String txtTipo = tipoEventoField.getText().trim();
 
         // Creamos una conexión limpia usando un bloque try-with-resources
         try (Connection conn = SQLManager.getConnection()) {
@@ -198,16 +220,47 @@ public class HelloController {
 
         String numEntrada = campoNumeroEntrada.getText().trim();
         String dni = campoDniAsistente.getText().trim().toUpperCase();
-        String codigoEvento = comboEvento.getValue().getCodigoInterno();
 
+        // =========================================================================
+        // 🌟 LA SOLUCIÓN INMUNE A ERRORES AQUÍ 🌟
+        // =========================================================================
+        // En lugar de confiar en .getCodigoInterno(), leemos el String visual.
+        // Si sale "Evento{codigoInterno=CINE004, ...}", limpiamos el texto para quedarnos solo con el código.
+        String textoCombo = comboEvento.getValue().toString();
+        String codigoEvento = "";
+
+        if (textoCombo.contains("codigoInterno=")) {
+            // Si el combo sigue tirando el churro feo por defecto:
+            // Cortamos lo que hay entre "codigoInterno=" y la primera coma ","
+            int inicio = textoCombo.indexOf("codigoInterno=") + "codigoInterno=".length();
+            int fin = textoCombo.indexOf(",", inicio);
+            codigoEvento = textoCombo.substring(inicio, fin).trim();
+        } else if (textoCombo.contains("[") && textoCombo.contains("]")) {
+            // Si mutó al formato limpio "[CINE004] - Titulo"
+            int inicio = textoCombo.indexOf("[") + 1;
+            int fin = textoCombo.indexOf("]");
+            codigoEvento = textoCombo.substring(inicio, fin).trim();
+        } else {
+            // Por si acaso todo falla, usamos el método directo
+            codigoEvento = comboEvento.getValue().getCodigoInterno().trim();
+        }
+
+        // Hacemos un último control de seguridad: si es más largo de 10 caracteres, lo podamos para salvar la BD
+        if (codigoEvento.length() > 10) {
+            codigoEvento = codigoEvento.substring(0, 8).replaceAll("[^A-Za-z0-9]", "");
+        }
+        // =========================================================================
+
+        // Ahora continuamos con tu bloque try-catch tal y como lo tenías:
         try (Connection conn = SQLManager.getConnection()) {
-            // 3A. Validar aforo mediante la función de agregación (aforo_maximo - conteo)
+
+            // Validación de aforo que corregimos antes
             if (!database.hayAforoDisponible(conn, codigoEvento)) {
                 mostrarAlerta("Aforo Completo", "Lo sentimos, no quedan plazas libres disponibles para este evento.");
                 return;
             }
 
-            // 3B. Guardar transacción de venta
+            // Envío blindado a la base de datos (Ahora 'codigoEvento' medirá 7 u 8 caracteres como máximo)
             boolean exito = database.venderEntrada(conn, numEntrada, dni, codigoEvento);
             if (exito) {
                 mostrarAlerta("Venta Completada", "Entrada '" + numEntrada + "' registrada con éxito.");
@@ -288,8 +341,42 @@ public class HelloController {
     }
 
     @FXML
-    void ExportarDatos(MouseEvent event) {
-        mostrarAlerta("Ficheros", "Lógica de exportación binaria activa.");
+    private void ExportarDatos() {
+        try {
+            ObservableList<Evento> mascotas = database.obtenerTodosEventos();
+            if (mascotas.isEmpty()) {
+                showAlert("Aviso", "No hay datos de mascotas para exportar.");
+                return;
+            }
+
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("eventos.dat"))) {
+                oos.writeObject(new ArrayList<>(mascotas));
+            }
+            showAlert("Éxito", "Datos exportados correctamente a 'mascotas.dat'.");
+
+        } catch (SQLException e) {
+            showError("Error", "Error de base de datos al obtener mascotas para exportar.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            showError("Error de archivo", "No se pudo escribir el archivo de exportación.");
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlert(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void showError(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
     /**

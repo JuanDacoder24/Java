@@ -70,22 +70,40 @@ public class SQLAccess {
         }
     }
 
-    // 3A. Verificar si el evento cuenta con aforo disponible
+    // 3A. Verificar si el evento cuenta con aforo disponible (Corregido)
     public boolean hayAforoDisponible(Connection conn, String codigoEvento) throws SQLException {
-        String sql = "SELECT (e.aforo_maximo - COUNT(en.numero_entrada)) AS plazas_libres " +
-                "FROM evento e " +
-                "LEFT JOIN entrada en ON e.codigo_interno = en.evento_codigo " +
-                "WHERE e.codigo_interno = ? " +
-                "GROUP BY e.codigo_interno";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        // Cambiamos la estrategia: Contamos cuántas entradas hay por un lado, y miramos el aforo por otro
+        String sqlEntradas = "SELECT COUNT(*) FROM entrada WHERE evento_codigo = ?";
+        String sqlAforo = "SELECT aforo_maximo FROM evento WHERE codigo_interno = ?";
+
+        int entradasVendidas = 0;
+        int aforoMaximo = 0;
+
+        // 1. Contamos las entradas vendidas actualmente
+        try (PreparedStatement ps = conn.prepareStatement(sqlEntradas)) {
             ps.setString(1, codigoEvento);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("plazas_libres") > 0;
+                    entradasVendidas = rs.getInt(1);
                 }
             }
         }
-        return false; // Si no encuentra el evento, asumimos que no hay aforo
+
+        // 2. Obtenemos el aforo máximo permitido para ese evento
+        try (PreparedStatement ps = conn.prepareStatement(sqlAforo)) {
+            ps.setString(1, codigoEvento);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    aforoMaximo = rs.getInt("aforo_maximo");
+                } else {
+                    return false; // Si ni siquiera encuentra el evento, no hay aforo
+                }
+            }
+        }
+
+        // 3. Comprobación lógica limpia
+        // Si las vendidas son menores que el aforo total, ¡entonces SÍ hay plazas libres!
+        return entradasVendidas < aforoMaximo;
     }
 
     // 3B. Registrar la venta de la entrada con su número único autogenerado
